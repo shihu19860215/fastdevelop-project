@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.msh.fastdevelop.sys</groupId>
+    <artifactId>sys-server</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <modules>
+        <module>./sys-client</module>
+        <module>./sys-service</module>
+        <module>./sys-web</module>
+    </modules>
+
+    <!-- Spring Boot 启动父依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+    </parent>
+
+    <properties>
+        <msh.version>1.0.0</msh.version>
+        <sys.version>1.0.0</sys.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <lombok.version>1.16.18</lombok.version>
+        <servlet.version>4.0.0-b05</servlet.version>
+        <mybatis.springboot.version>1.2.0</mybatis.springboot.version>
+        <mail.version>1.4.7</mail.version>
+        <springfox.version>2.7.0</springfox.version>
+        <swagger.version>1.5.20</swagger.version>
+        <guava.version>23.2-jre</guava.version>
+        <druid.version>1.1.9</druid.version>
+    <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.msh.fastdevelop.sys</groupId>
+                <artifactId>sys-client</artifactId>
+                <version>${sys.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-frame-common</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-frame-web</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-frame-web</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-frame-client</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-cache-redis</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--google-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

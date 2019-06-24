@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msh.fastdevelop.sys.service.dao.AuthorityDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.msh.fastdevelop.sys.client.po.AuthorityPO" id="authorityMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="layer" column="layer"/>
+        <result property="type" column="type"/>
+        <result property="sort" column="sort"/>
+        <result property="icon" column="icon"/>
+        <result property="status" column="status"/>
+        <result property="updateVersion" column="update_version"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="base_column_list">
+        id,name,code,parent_id,layer,type,sort,icon,status,update_version,create_time,update_time
+    </sql>
+
+
+    <sql id="base_where">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id != null">AND id = #{id}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="parentId != null">AND parent_id = #{parentId}</if>
+            <if test="layer != null">AND layer = #{layer}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="sort != null">AND sort = #{sort}</if>
+            <if test="icon != null">AND icon = #{icon}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="updateVersion != null">AND update_version = #{updateVersion}</if>
+            <if test="createTime != null">AND create_time = #{createTime}</if>
+            <if test="updateTime != null">AND update_time = #{updateTime}</if>
+            <if test="egtStatus != null">AND status &gt;= #{egtStatus}</if>
+            <if test="inIds != null">AND id in
+                <foreach collection="inIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+            </if>
+        </trim>
+    </sql>
+
+    <select id="get" resultMap="authorityMap" parameterType="long">
+        select
+        <include refid="base_column_list"/>
+        from sys_authority where id = #{id}
+    </select>
+
+    <select id="list" resultMap="authorityMap"
+            parameterType="com.msh.fastdevelop.sys.client.qo.AuthorityQO">
+        select
+        <include refid="base_column_list"/>
+        from sys_authority
+        <include refid="base_where"/>
+        order by sort
+        <if test="page != null">
+            limit #{page.firstRow},#{page.pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="int" parameterType="com.msh.fastdevelop.sys.client.qo.AuthorityQO">
+        select count(id) from sys_authority
+        <include refid="base_where"/>
+    </select>
+
+    <insert id="insert" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_authority
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="layer != null">layer,</if>
+            <if test="type != null">type,</if>
+            <if test="sort != null">sort,</if>
+            <if test="icon != null">icon,</if>
+            <if test="status != null">status,</if>
+            update_version,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="layer != null">#{layer},</if>
+            <if test="type != null">#{type},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="status != null">#{status},</if>
+            1,
+        </trim>
+    </insert>
+
+    <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_authority
+        (id,name,code,parent_id,layer,type,sort,icon,status,update_version)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.id},#{item.name},#{item.code},#{item.parentId},#{item.layer},#{item.type},#{item.sort},#{item.icon},#{item.status},1)
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityPO">
+        update sys_authority
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="layer != null">
+                layer = #{layer},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+             update_version = update_version+1,
+        </set>
+        where id = #{id}
+        <if test="updateVersion != null">and update_version = #{updateVersion}</if>
+    </update>
+
+    <delete id="delete">
+        delete from sys_authority where id = #{id}
+    </delete>
+    <delete id="logicDelete">
+        update sys_authority set status = -1 where id = #{id}
+    </delete>
+</mapper>

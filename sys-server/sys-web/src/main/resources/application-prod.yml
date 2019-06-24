@@ -1,0 +1,65 @@
+server:
+  tomcat:
+    max-threads: 3000
+    min-spare-threads: 10
+  port: 20122
+  swagger:
+    display: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20101/eureka/
+spring:
+  application:
+    name: sys-api
+  datasource: #以下数据库部分自行修改
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.7.34:3306/fastdevelop?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: entore
+    password: entore
+    dbcp2:
+      max-idle: 10
+      max-wait-millis: 10000
+      min-idle: 5
+      initial-size: 5
+      validation-query: select 1
+      test-on-borrow: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 18800
+  transaction:
+    rollback-on-commit-failure: true
+  redis: #以下redis部分自行修改
+    host: 192.168.7.34
+    port: 6379
+    #       password: dh35hebsd87ed9df9d0kemd9
+    database: 0
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 0
+        max-active: 50
+        max-wait: 5000
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 5Mb
+      max-request-size: 10Mb
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+
+com:
+  msh:
+    frame:
+      common:
+        logMethodStart: "*"
+logging:
+  level:
+    root: warn
+    com:
+      msh: info
+      msh: 
+        fastdevelop: 
+          sys: info

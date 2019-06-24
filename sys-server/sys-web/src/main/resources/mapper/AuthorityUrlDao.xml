@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msh.fastdevelop.sys.service.dao.AuthorityUrlDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.msh.fastdevelop.sys.client.po.AuthorityUrlPO" id="authorityUrlMap">
+        <result property="id" column="id"/>
+        <result property="authorityId" column="authority_id"/>
+        <result property="url" column="url"/>
+        <result property="linkAuth" column="link_auth"/>
+        <result property="status" column="status"/>
+        <result property="updateVersion" column="update_version"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="base_column_list">
+        id,authority_id,url,link_auth,status,update_version,create_time,update_time
+    </sql>
+
+
+    <sql id="base_where">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id != null">AND id = #{id}</if>
+            <if test="authorityId != null">AND authority_id = #{authorityId}</if>
+            <if test="url != null">AND url = #{url}</if>
+            <if test="linkAuth != null">AND link_auth = #{linkAuth}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="updateVersion != null">AND update_version = #{updateVersion}</if>
+            <if test="createTime != null">AND create_time = #{createTime}</if>
+            <if test="updateTime != null">AND update_time = #{updateTime}</if>
+            <if test="egtStatus != null">AND status &gt;= #{egtStatus}</if>
+            <if test="inAuthIds != null">AND authority_id in
+                <foreach collection="inAuthIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+            </if>
+        </trim>
+    </sql>
+
+    <select id="get" resultMap="authorityUrlMap" parameterType="long">
+        select
+        <include refid="base_column_list"/>
+        from sys_authority_url where id = #{id}
+    </select>
+
+    <select id="list" resultMap="authorityUrlMap"
+            parameterType="com.msh.fastdevelop.sys.client.qo.AuthorityUrlQO">
+        select
+        <include refid="base_column_list"/>
+        from sys_authority_url
+        <include refid="base_where"/>
+        <if test="page != null">
+            limit #{page.firstRow},#{page.pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="int" parameterType="com.msh.fastdevelop.sys.client.qo.AuthorityUrlQO">
+        select count(id) from sys_authority_url
+        <include refid="base_where"/>
+    </select>
+
+    <insert id="insert" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityUrlPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_authority_url
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="authorityId != null">authority_id,</if>
+            <if test="url != null">url,</if>
+            <if test="linkAuth != null">link_auth,</if>
+            <if test="status != null">status,</if>
+            update_version,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="authorityId != null">#{authorityId},</if>
+            <if test="url != null">#{url},</if>
+            <if test="linkAuth != null">#{linkAuth},</if>
+            <if test="status != null">#{status},</if>
+            1,
+        </trim>
+    </insert>
+
+    <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityUrlPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_authority_url
+        (id,authority_id,url,link_auth,status,update_version)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.id},#{item.authorityId},#{item.url},#{item.linkAuth},#{item.status},1)
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.msh.fastdevelop.sys.client.po.AuthorityUrlPO">
+        update sys_authority_url
+        <set>
+            <if test="authorityId != null">
+                authority_id = #{authorityId},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="linkAuth != null">
+                link_auth = #{linkAuth},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+             update_version = update_version+1,
+        </set>
+        where id = #{id}
+        <if test="updateVersion != null">and update_version = #{updateVersion}</if>
+    </update>
+
+    <delete id="delete">
+        delete from sys_authority_url where id = #{id}
+    </delete>
+    <delete id="logicDelete">
+        update sys_authority_url set status = -1 where id = #{id}
+    </delete>
+</mapper>

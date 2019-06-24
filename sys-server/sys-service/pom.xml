@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sys-server</artifactId>
+        <groupId>com.msh.fastdevelop.sys</groupId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sys-service</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.msh.fastdevelop.sys</groupId>
+            <artifactId>sys-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msh</groupId>
+            <artifactId>msh-frame-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msh</groupId>
+            <artifactId>msh-cache-redis</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Mybatis 依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- MySQL 连接驱动依赖 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
