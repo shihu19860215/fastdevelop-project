@@ -31,8 +31,6 @@ public class UserRoleMappingServiceImpl extends BaseServiceImpl<UserRoleMappingP
     private UserRoleMappingDao userRoleMappingDao;
     @Autowired
     private UserRoleMappingService userRoleMappingService;
-    @Autowired
-    private IdGenerateable idGenerateable;
 
     @Override
     public CommonResult<List<UserRoleMappingPO>> list(UserRoleMappingQO param) {
@@ -42,16 +40,11 @@ public class UserRoleMappingServiceImpl extends BaseServiceImpl<UserRoleMappingP
 
     @Override
     public CommonResult<Boolean> insert(UserRoleMappingPO param) {
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<UserRoleMappingPO> param) {
-        Iterator<UserRoleMappingPO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         return super.insertCollection(param);
     }
 

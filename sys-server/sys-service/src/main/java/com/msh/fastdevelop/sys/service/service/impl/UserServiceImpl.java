@@ -36,8 +36,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
     @Autowired
     private UserService userService;
     @Autowired
-    private IdGenerateable idGenerateable;
-    @Autowired
     private UserRoleMappingService userRoleMappingService;
     @Autowired
     private RoleAuthorityMappingService roleAuthorityMappingService;
@@ -60,16 +58,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
 
     @Override
     public CommonResult<Boolean> insert(UserPO param) {
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<UserPO> param) {
-        Iterator<UserPO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         return super.insertCollection(param);
     }
 
@@ -152,7 +145,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
                 List<UserRoleMappingPO> list = new ArrayList<>(newRoleIds.size());
                 for(Long rId :newRoleIds){
                     UserRoleMappingPO sysUserRoleMappingPO = new UserRoleMappingPO();
-                    sysUserRoleMappingPO.setId(idGenerateable.getUniqueID());
                     sysUserRoleMappingPO.setUserId(userVO.getId());
                     sysUserRoleMappingPO.setRoleId(rId);
                     list.add(sysUserRoleMappingPO);
@@ -173,7 +165,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
             List<UserRoleMappingPO> list = new ArrayList<>(newRoleIds.size());
             for(Long rId :newRoleIds){
                 UserRoleMappingPO userRoleMappingPO = new UserRoleMappingPO();
-                userRoleMappingPO.setId(idGenerateable.getUniqueID());
                 userRoleMappingPO.setUserId(userVO.getId());
                 userRoleMappingPO.setRoleId(rId);
                 list.add(userRoleMappingPO);

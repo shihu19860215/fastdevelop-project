@@ -35,8 +35,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RolePO,RoleQO> implements R
     @Autowired
     private RoleService roleService;
     @Autowired
-    private IdGenerateable idGenerateable;
-    @Autowired
     private RoleAuthorityMappingService roleAuthorityMappingService;
 
     @Override
@@ -47,16 +45,11 @@ public class RoleServiceImpl extends BaseServiceImpl<RolePO,RoleQO> implements R
 
     @Override
     public CommonResult<Boolean> insert(RolePO param) {
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<RolePO> param) {
-        Iterator<RolePO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         return super.insertCollection(param);
     }
 

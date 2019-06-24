@@ -31,8 +31,6 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     @Autowired
     private AuthorityService authorityService;
     @Autowired
-    private IdGenerateable idGenerateable;
-    @Autowired
     private CacheWrapper cacheWrapper;
 
     @Override
@@ -53,7 +51,6 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
         }else {
             param.setLayer(1);
         }
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
@@ -62,7 +59,6 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
         Iterator<AuthorityPO> iterator = authorityPOCollection.iterator();
         while(iterator.hasNext()){
             AuthorityPO param = iterator.next();
-            param.setId(idGenerateable.getUniqueID());
             Long parentId = param.getParentId();
             if(parentId > 0){
                 AuthorityPO authorityPO = authorityService.get(parentId).getResult();

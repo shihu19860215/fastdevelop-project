@@ -30,8 +30,6 @@ public class RoleAuthorityMappingServiceImpl extends BaseServiceImpl<RoleAuthori
     private RoleAuthorityMappingDao roleAuthorityMappingDao;
     @Autowired
     private RoleAuthorityMappingService roleAuthorityMappingService;
-    @Autowired
-    private IdGenerateable idGenerateable;
 
     @Override
     public CommonResult<List<RoleAuthorityMappingPO>> list(RoleAuthorityMappingQO param) {
@@ -41,16 +39,11 @@ public class RoleAuthorityMappingServiceImpl extends BaseServiceImpl<RoleAuthori
 
     @Override
     public CommonResult<Boolean> insert(RoleAuthorityMappingPO param) {
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<RoleAuthorityMappingPO> param) {
-        Iterator<RoleAuthorityMappingPO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         return super.insertCollection(param);
     }
 
@@ -115,7 +108,6 @@ public class RoleAuthorityMappingServiceImpl extends BaseServiceImpl<RoleAuthori
                 List<RoleAuthorityMappingPO> list = new ArrayList<>(newAuthorityIds.size());
                 for(Long aId :newAuthorityIds){
                     RoleAuthorityMappingPO sysRoleAuthorityMappingPO = new RoleAuthorityMappingPO();
-                    sysRoleAuthorityMappingPO.setId(idGenerateable.getUniqueID());
                     sysRoleAuthorityMappingPO.setRoleId(roleVO.getId());
                     sysRoleAuthorityMappingPO.setAuthorityId(aId);
                     list.add(sysRoleAuthorityMappingPO);

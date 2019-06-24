@@ -31,8 +31,6 @@ public class ColumnDictServiceImpl extends BaseServiceImpl<ColumnDictPO,ColumnDi
     private ColumnDictDao columnDictDao;
     @Autowired
     private ColumnDictService columnDictService;
-    @Autowired
-    private IdGenerateable idGenerateable;
 
     @Override
     public CommonResult<List<ColumnDictPO>> list(ColumnDictQO param) {
@@ -42,16 +40,11 @@ public class ColumnDictServiceImpl extends BaseServiceImpl<ColumnDictPO,ColumnDi
 
     @Override
     public CommonResult<Boolean> insert(ColumnDictPO param) {
-        param.setId(idGenerateable.getUniqueID());
         return super.insert(param);
     }
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<ColumnDictPO> param) {
-        Iterator<ColumnDictPO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         return super.insertCollection(param);
     }
 

@@ -34,8 +34,6 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
     @Autowired
     private AuthorityUrlService authorityUrlService;
     @Autowired
-    private IdGenerateable idGenerateable;
-    @Autowired
     private CacheWrapper cacheWrapper;
     @Autowired
     private AuthorityService authorityService;
@@ -48,7 +46,6 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
 
     @Override
     public CommonResult<Boolean> insert(AuthorityUrlPO param) {
-        param.setId(idGenerateable.getUniqueID());
         CommonResult<Boolean> commonResult = super.insert(param);
         cacheWrapper.clearUrlAuthIdMap();
         return commonResult;
@@ -56,10 +53,6 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
 
     @Override
     public CommonResult<Boolean> insertCollection(Collection<AuthorityUrlPO> param) {
-        Iterator<AuthorityUrlPO> iterator = param.iterator();
-        while(iterator.hasNext()){
-            iterator.next().setId(idGenerateable.getUniqueID());
-        }
         CommonResult<Boolean> commonResult = super.insertCollection(param);
         cacheWrapper.clearUrlAuthIdMap();
         return commonResult;
