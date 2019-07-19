@@ -1,8 +1,6 @@
 package com.msh.fastdevelop.sys.web.api;
 
-import com.msh.fastdevelop.sys.service.wrapper.CacheWrapper;
 import com.msh.frame.client.common.CommonResult;
-import com.msh.frame.common.util.CollectionUtils;
 import com.msh.frame.web.base.BaseController;
 import com.msh.fastdevelop.sys.client.po.ColumnDictPO;
 import com.msh.fastdevelop.sys.client.qo.ColumnDictQO;
@@ -16,7 +14,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -32,8 +29,6 @@ public class ColumnDictApi extends BaseController<ColumnDictPO, ColumnDictQO> {
 
     @Autowired
     private ColumnDictService columnDictService;
-    @Autowired
-    private CacheWrapper cacheWrapper;
 
     /**
      * 通用查询逻辑
@@ -103,13 +98,5 @@ public class ColumnDictApi extends BaseController<ColumnDictPO, ColumnDictQO> {
     @RequestMapping("listvo")
     public CommonResult<List<ColumnDictVO>> listColumnDictVO(@ModelAttribute("pojo")ColumnDictQO q) {
         return columnDictService.listColumnDictVO(q);
-    }
-
-
-    @ApiOperation(value = "通用查询逻辑", httpMethod = "GET", notes = "通用查询逻辑")
-    @RequestMapping("listdict")
-    public CommonResult<List<ColumnDictPO>> listDict(@RequestParam("tableName") String tableName, @RequestParam("columnName") String columnName) {
-        List<ColumnDictPO> list = cacheWrapper.getDictList(tableName, columnName);
-        return CommonResult.successReturn(list);
     }
 }

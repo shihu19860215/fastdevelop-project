@@ -36,6 +36,9 @@ public class AreaServiceImpl extends BaseServiceImpl<AreaPO,AreaQO> implements A
 
     @Override
     public CommonResult<List<AreaPO>> list(AreaQO param) {
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
     }
 

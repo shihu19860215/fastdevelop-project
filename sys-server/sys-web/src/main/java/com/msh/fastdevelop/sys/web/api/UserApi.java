@@ -42,6 +42,7 @@ public class UserApi extends BaseController<UserPO, UserQO> {
     @ApiOperation(value = "通用查询逻辑", httpMethod = "GET", notes = "通用查询逻辑")
     @RequestMapping("list")
     public CommonResult<List<UserPO>> list(@ModelAttribute("pojo")UserQO q) {
+        q.setOperatorId(SessionUtil.getUserId());
         CommonResult<List<UserPO>> query = userService.list(q);
         return query;
     }
@@ -64,6 +65,7 @@ public class UserApi extends BaseController<UserPO, UserQO> {
     @ApiOperation(value = "通用更新逻辑", httpMethod = "POST", notes = "通用更新逻辑")
     @RequestMapping("update")
     public CommonResult<Boolean> update(@RequestBody UserPO t) {
+        t.setOperatorId(SessionUtil.getUserId());
         return userService.update(t);
     }
 
@@ -86,6 +88,7 @@ public class UserApi extends BaseController<UserPO, UserQO> {
     @ApiOperation(value = "通用插入逻辑", httpMethod = "POST", notes = "通用插入逻辑")
     @RequestMapping("insert")
     public CommonResult<Boolean> insert(@RequestBody UserPO t) {
+        t.setOperatorId(SessionUtil.getUserId());
         return userService.insert(t);
     }
 
@@ -101,6 +104,7 @@ public class UserApi extends BaseController<UserPO, UserQO> {
     @ApiOperation(value = "vo列表查询", httpMethod = "GET", notes = "vo列表查询")
     @RequestMapping("listvo")
     public CommonResult<List<UserVO>> listUserVO(@ModelAttribute("pojo")UserQO q) {
+        q.setOperatorId(SessionUtil.getUserId());
         return userService.listUserVO(q);
     }
 
@@ -108,12 +112,14 @@ public class UserApi extends BaseController<UserPO, UserQO> {
     @ApiOperation(value = "更新用户信息", httpMethod = "POST", notes = "更新用户信息")
     @RequestMapping("updateuservo")
     public CommonResult<Boolean> updateSysUserVO(@RequestBody UserVO t) {
+        t.setOperatorId(SessionUtil.getUserId());
         return userService.updateSysUserVO(t);
     }
 
     @ApiOperation(value = "新增用户信息", httpMethod = "POST", notes = "新增用户信息")
     @RequestMapping("insertuservo")
     public CommonResult<Boolean> insertSysUserVO(@RequestBody UserVO t) {
+        t.setOperatorId(SessionUtil.getUserId());
         return userService.insertSysUserVO(t);
     }
 

@@ -22,17 +22,6 @@ public class AuthorityUrlPO extends BasePO{
 	@ApiModelProperty("连接权限 1拥有权限可访问 2用户登录可访问 3无需登录可访问")
 	private Integer linkAuth;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("更新版本")
-	private Integer updateVersion;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
 
 
 	public void setAuthorityId(Long value) {
@@ -59,37 +48,6 @@ public class AuthorityUrlPO extends BasePO{
 		return this.linkAuth;
 	}
 
-	public void setStatus(Integer value) {
-		this.status = value;
-	}
-
-	public Integer getStatus() {
-		return this.status;
-	}
-
-	public void setUpdateVersion(Integer value) {
-		this.updateVersion = value;
-	}
-
-	public Integer getUpdateVersion() {
-		return this.updateVersion;
-	}
-
-	public void setCreateTime(Date value) {
-		this.createTime = value;
-	}
-
-	public Date getCreateTime() {
-		return this.createTime;
-	}
-
-	public void setUpdateTime(Date value) {
-		this.updateTime = value;
-	}
-
-	public Date getUpdateTime() {
-		return this.updateTime;
-	}
 
 
 	@Override

@@ -2,7 +2,7 @@ package com.msh.fastdevelop.sys.web.filter;
 
 import com.msh.fastdevelop.sys.client.model.UserInfo;
 import com.msh.fastdevelop.sys.service.define.CommonCodeDef;
-import com.msh.fastdevelop.sys.service.wrapper.CacheWrapper;
+import com.msh.fastdevelop.sys.service.service.AuthorityUrlService;
 import com.msh.fastdevelop.sys.web.util.SessionUtil;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.web.util.HttpServletResponseUtil;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public class AuthorityFilter implements Filter {
-    private CacheWrapper cacheWrapper;
+    private AuthorityUrlService authorityUrlService;
 
-    public AuthorityFilter(CacheWrapper cacheWrapper) {
-        this.cacheWrapper = cacheWrapper;
+    public AuthorityFilter(AuthorityUrlService authorityUrlService) {
+        this.authorityUrlService = authorityUrlService;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AuthorityFilter implements Filter {
             filterChain.doFilter(request, servletResponse);
             return;
         }
-        Map<String, Integer> urlAuthMap = cacheWrapper.getUrlAuthIdMap();
+        Map<String, Integer> urlAuthMap = authorityUrlService.getUrlAuthIdMap().getResult();
         String uri =request.getRequestURI();
         Integer linkAuth = urlAuthMap.get(uri);
         if(null == linkAuth){

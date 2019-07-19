@@ -1,8 +1,6 @@
 package com.msh.fastdevelop.sys.client.qo;
 
 import java.util.Date;
-import java.util.Set;
-
 import com.msh.frame.client.base.BaseQO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,28 +9,29 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-18 20:51:33
+ * @date 2019-06-29 14:15:29
  */
 @ApiModel
 @Data
-public class UserRoleMappingQO extends BaseQO {
-	@ApiModelProperty("用户id")
-	private Long userId;
+public class AuditConfigureQO extends BaseQO {
+	@ApiModelProperty("类名")
+	private String className;
 
-	@ApiModelProperty("角色id")
-	private Long roleId;
+	@ApiModelProperty("字段名")
+	private String fieldName;
+
+	@ApiModelProperty("实际意思")
+	private String meaning;
+
 
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
-
-	@ApiModelProperty("in用户id查询")
-    private Set<Long> inUserIds;
 
 @Override
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		boolean nullFlag=false;
-		sb.append("UserRoleMappingPO{");
+		sb.append("AuditConfigurePO{");
 		if(null!=id){
 		if(nullFlag){
 		sb.append(",id=").append(id);
@@ -41,19 +40,27 @@ public class UserRoleMappingQO extends BaseQO {
 		nullFlag=true;
 		}
 		}
-		if(null!=userId){
+		if(null!=className){
 		if(nullFlag){
-		sb.append(",userId=").append(userId);
+		sb.append(",className=").append(className);
 		}else {
-		sb.append("userId=").append(userId);
+		sb.append("className=").append(className);
 		nullFlag=true;
 		}
 		}
-		if(null!=roleId){
+		if(null!=fieldName){
 		if(nullFlag){
-		sb.append(",roleId=").append(roleId);
+		sb.append(",fieldName=").append(fieldName);
 		}else {
-		sb.append("roleId=").append(roleId);
+		sb.append("fieldName=").append(fieldName);
+		nullFlag=true;
+		}
+		}
+		if(null!=meaning){
+		if(nullFlag){
+		sb.append(",meaning=").append(meaning);
+		}else {
+		sb.append("meaning=").append(meaning);
 		nullFlag=true;
 		}
 		}

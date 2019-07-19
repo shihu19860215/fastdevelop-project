@@ -9,32 +9,43 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-18 20:51:33
+ * @date 2019-06-29 14:15:29
  */
 @ApiModel
-public class RoleAuthorityMappingPO extends BasePO{
-	@ApiModelProperty("角色id")
-	private Long roleId;
+public class AuditConfigurePO extends BasePO{
+	@ApiModelProperty("类名")
+	private String className;
 
-	@ApiModelProperty("权限id")
-	private Long authorityId;
+	@ApiModelProperty("字段名")
+	private String fieldName;
+
+	@ApiModelProperty("实际意思")
+	private String meaning;
 
 
 
-	public void setRoleId(Long value) {
-		this.roleId = value;
+	public void setClassName(String value) {
+		this.className = value;
 	}
 
-	public Long getRoleId() {
-		return this.roleId;
+	public String getClassName() {
+		return this.className;
 	}
 
-	public void setAuthorityId(Long value) {
-		this.authorityId = value;
+	public void setFieldName(String value) {
+		this.fieldName = value;
 	}
 
-	public Long getAuthorityId() {
-		return this.authorityId;
+	public String getFieldName() {
+		return this.fieldName;
+	}
+
+	public void setMeaning(String value) {
+		this.meaning = value;
+	}
+
+	public String getMeaning() {
+		return this.meaning;
 	}
 
 
@@ -43,7 +54,7 @@ public class RoleAuthorityMappingPO extends BasePO{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		boolean nullFlag=false;
-		sb.append("RoleAuthorityMappingPO{");
+		sb.append("AuditConfigurePO{");
 		if(null!=id){
 			if(nullFlag){
 				sb.append(",id=").append(id);
@@ -52,19 +63,27 @@ public class RoleAuthorityMappingPO extends BasePO{
 				nullFlag=true;
 			}
 		}
-		if(null!=roleId){
+		if(null!=className){
 			if(nullFlag){
-				sb.append(",roleId=").append(roleId);
+				sb.append(",className=").append(className);
 			}else {
-				sb.append("roleId=").append(roleId);
+				sb.append("className=").append(className);
 				nullFlag=true;
 			}
 		}
-		if(null!=authorityId){
+		if(null!=fieldName){
 			if(nullFlag){
-				sb.append(",authorityId=").append(authorityId);
+				sb.append(",fieldName=").append(fieldName);
 			}else {
-				sb.append("authorityId=").append(authorityId);
+				sb.append("fieldName=").append(fieldName);
+				nullFlag=true;
+			}
+		}
+		if(null!=meaning){
+			if(nullFlag){
+				sb.append(",meaning=").append(meaning);
+			}else {
+				sb.append("meaning=").append(meaning);
 				nullFlag=true;
 			}
 		}

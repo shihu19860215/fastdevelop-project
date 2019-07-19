@@ -1,6 +1,6 @@
 package com.msh.fastdevelop.sys.service.config;
 
-import com.msh.frame.common.aop.aspect.AbstractCommonResultHandleAsperct;
+import com.msh.frame.common.aop.aspect.AbstractCommonResultHandleAspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
@@ -13,7 +13,7 @@ import org.springframework.core.annotation.Order;
  */
 @Aspect
 @Order(100)
-abstract public class AbstractServiceCommonResultAsperct extends AbstractCommonResultHandleAsperct {
+abstract public class AbstractServiceCommonResultAsperct extends AbstractCommonResultHandleAspect {
 
     @Override
     @Pointcut("this(com.msh.frame.client.base.BaseService)")

@@ -37,15 +37,6 @@ public class AreaPO extends BasePO{
 	@ApiModelProperty("区域")
 	private String area;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
-
 
 	public void setSimpleCode(Integer value) {
 		this.simpleCode = value;
@@ -111,29 +102,6 @@ public class AreaPO extends BasePO{
 		return this.area;
 	}
 
-	public void setStatus(Integer value) {
-		this.status = value;
-	}
-
-	public Integer getStatus() {
-		return this.status;
-	}
-
-	public void setCreateTime(Date value) {
-		this.createTime = value;
-	}
-
-	public Date getCreateTime() {
-		return this.createTime;
-	}
-
-	public void setUpdateTime(Date value) {
-		this.updateTime = value;
-	}
-
-	public Date getUpdateTime() {
-		return this.updateTime;
-	}
 
 
 	@Override

@@ -5,6 +5,11 @@ server:
   port: 20122
   swagger:
     display: true
+  servlet:
+    session:
+      timeout: 4d
+      cookie:
+        max-age: 3d
 eureka:
   client:
     serviceUrl:
@@ -43,7 +48,7 @@ spring:
         max-idle: 10
         min-idle: 0
         max-active: 50
-        max-wait: 5000
+        max-wait: 5000ms
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss

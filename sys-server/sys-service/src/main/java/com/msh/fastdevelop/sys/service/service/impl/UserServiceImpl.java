@@ -1,15 +1,12 @@
 package com.msh.fastdevelop.sys.service.service.impl;;
 
 import com.msh.fastdevelop.sys.client.model.UserInfo;
-import com.msh.fastdevelop.sys.client.po.AuthorityUrlPO;
-import com.msh.fastdevelop.sys.client.po.RoleAuthorityMappingPO;
-import com.msh.fastdevelop.sys.client.po.UserRoleMappingPO;
+import com.msh.fastdevelop.sys.client.po.*;
 import com.msh.fastdevelop.sys.client.qo.*;
 import com.msh.fastdevelop.sys.client.vo.AuthorityVO;
 import com.msh.fastdevelop.sys.service.define.CommonCodeDef;
 import com.msh.fastdevelop.sys.service.service.*;
 import com.msh.frame.client.base.BaseServiceImpl;
-import com.msh.fastdevelop.sys.client.po.UserPO;
 import com.msh.fastdevelop.sys.client.vo.UserVO;
 import com.msh.fastdevelop.sys.service.dao.UserDao;
 import com.msh.frame.client.common.CommonResult;
@@ -36,6 +33,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
     @Autowired
     private UserService userService;
     @Autowired
+    private RoleService roleService;
+    @Autowired
     private UserRoleMappingService userRoleMappingService;
     @Autowired
     private RoleAuthorityMappingService roleAuthorityMappingService;
@@ -43,6 +42,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
     private AuthorityUrlService authorityUrlService;
     @Autowired
     private AuthorityService authorityService;
+    @Autowired
+    private AuditService auditService;
+
+    @Override
+    public CommonResult<Boolean> update(UserPO param) {
+        UserPO userPO = userService.get(param.getId()).getResult();
+        auditService.audit(param, userPO);
+        return super.update(param);
+    }
 
     @Override
     public CommonResult<Boolean> delete(long param) {
@@ -52,7 +60,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
 
     @Override
     public CommonResult<List<UserPO>> list(UserQO param) {
-        param.setEgtStatus(0);
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
     }
 
@@ -152,7 +162,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
                 userRoleMappingService.insertCollection(list);
             }
         }
-        return this.update(userVO);
+        return userService.update(userVO);
     }
 
     @Override
@@ -184,6 +194,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
         if(null == userPO){
             return CommonResult.errorReturn(CommonCodeDef.USERNAME_PASSWORD_ERROR);
         }
+        if(0 == userPO.getStatus()){
+            return CommonResult.errorReturn(CommonCodeDef.USER_DISABLE);
+        }
 
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(userPO.getId());
@@ -197,13 +210,25 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
             for(UserRoleMappingPO userRoleMappingPO: userRoleMappingPOList){
                 roleIds.add(userRoleMappingPO.getRoleId());
             }
-            RoleAuthorityMappingQO roleAuthorityMappingQO = new RoleAuthorityMappingQO();
-            roleAuthorityMappingQO.setInRoleIds(roleIds);
-            List<RoleAuthorityMappingPO> roleAuthorityMappingPOList = roleAuthorityMappingService.list(roleAuthorityMappingQO).getResult();
-            if(null != roleAuthorityMappingPOList && roleAuthorityMappingPOList.size()>0){
-                authIds = new HashSet<>();
-                for(RoleAuthorityMappingPO roleAuthorityMappingPO: roleAuthorityMappingPOList){
-                    authIds.add(roleAuthorityMappingPO.getAuthorityId());
+
+            RoleQO roleQO = new RoleQO();
+            roleQO.setInIds(roleIds);
+            roleQO.setStatus(1);
+            List<RolePO> rolePOList = roleService.list(roleQO).getResult();
+            if(null != rolePOList && rolePOList.size()>0){
+                roleIds = new HashSet<>();
+                for(RolePO rolePO: rolePOList){
+                    roleIds.add(rolePO.getId());
+                }
+
+                RoleAuthorityMappingQO roleAuthorityMappingQO = new RoleAuthorityMappingQO();
+                roleAuthorityMappingQO.setInRoleIds(roleIds);
+                List<RoleAuthorityMappingPO> roleAuthorityMappingPOList = roleAuthorityMappingService.list(roleAuthorityMappingQO).getResult();
+                if(null != roleAuthorityMappingPOList && roleAuthorityMappingPOList.size()>0){
+                    authIds = new HashSet<>();
+                    for(RoleAuthorityMappingPO roleAuthorityMappingPO: roleAuthorityMappingPOList){
+                        authIds.add(roleAuthorityMappingPO.getAuthorityId());
+                    }
                 }
             }
         }

@@ -23,18 +23,6 @@ public class UserQO extends BaseQO {
 	@ApiModelProperty("昵称")
 	private String nickname;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("更新版本")
-	private Integer updateVersion;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
-
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
 

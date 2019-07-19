@@ -1,6 +1,6 @@
 package com.msh.fastdevelop.sys.service.config;
 
-import com.msh.frame.common.aop.aspect.AbstractInfoLoggerAspectAsperct;
+import com.msh.frame.common.aop.aspect.AbstractInfoLoggerAspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
  */
 @Aspect
 @Order(10)
-abstract public class AbstractServiceDaoInfoLogAsperct extends AbstractInfoLoggerAspectAsperct {
+abstract public class AbstractServiceDaoInfoLogAspect extends AbstractInfoLoggerAspect {
     @Override
     @Pointcut("this(com.msh.frame.client.base.BaseService)")
     protected void pointcut() {

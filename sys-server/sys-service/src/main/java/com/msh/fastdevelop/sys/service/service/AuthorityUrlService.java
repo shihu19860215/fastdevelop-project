@@ -17,4 +17,5 @@ public interface AuthorityUrlService extends BaseService<AuthorityUrlPO,Authorit
         CommonResult<Boolean> logicDelete(Long id);
         CommonResult<List<AuthorityUrlVO>> listAuthorityUrlVO(AuthorityUrlQO param);
         CommonResult<Map<Long,List<AuthorityUrlVO>>> listAllAuthorityUrlVOMap();
+        CommonResult<Map<String, Integer>> getUrlAuthIdMap();
 }

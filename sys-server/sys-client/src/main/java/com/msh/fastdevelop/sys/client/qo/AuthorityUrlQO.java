@@ -25,18 +25,6 @@ public class AuthorityUrlQO extends BaseQO {
 	@ApiModelProperty("连接权限 1拥有权限可访问 2用户登录可访问 3无需登录可访问")
 	private Integer linkAuth;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("更新版本")
-	private Integer updateVersion;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
-
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
 

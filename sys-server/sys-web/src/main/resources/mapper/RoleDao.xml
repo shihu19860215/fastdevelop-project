@@ -27,6 +27,11 @@
             <if test="createTime != null">AND create_time = #{createTime}</if>
             <if test="updateTime != null">AND update_time = #{updateTime}</if>
             <if test="egtStatus != null">AND status &gt;= #{egtStatus}</if>
+            <if test="inIds != null">AND id in
+                <foreach collection="inIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+            </if>
         </trim>
     </sql>
 

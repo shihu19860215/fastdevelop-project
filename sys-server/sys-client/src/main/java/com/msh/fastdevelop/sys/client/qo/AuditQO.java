@@ -9,22 +9,31 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-19 20:58:20
+ * @date 2019-06-29 14:15:29
  */
 @ApiModel
 @Data
-public class ColumnDictQO extends BaseQO {
-	@ApiModelProperty("表名")
-	private String tableName;
+public class AuditQO extends BaseQO {
+	@ApiModelProperty("类名")
+	private String className;
 
 	@ApiModelProperty("字段名")
-	private String columnName;
+	private String fieldName;
 
-	@ApiModelProperty("数据库值")
-	private Integer databaseValue;
+	@ApiModelProperty("主键id")
+	private Long primaryKeyId;
 
-	@ApiModelProperty("实际意思")
-	private String meaning;
+	@ApiModelProperty("修改前值")
+	private String beforeValue;
+
+	@ApiModelProperty("修改后值")
+	private String afterValue;
+
+	@ApiModelProperty("操作人")
+	private Long operatorId;
+
+	@ApiModelProperty("备注")
+	private String comment;
 
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
@@ -33,7 +42,7 @@ public class ColumnDictQO extends BaseQO {
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		boolean nullFlag=false;
-		sb.append("ColumnDictPO{");
+		sb.append("AuditPO{");
 		if(null!=id){
 		if(nullFlag){
 		sb.append(",id=").append(id);
@@ -42,35 +51,59 @@ public class ColumnDictQO extends BaseQO {
 		nullFlag=true;
 		}
 		}
-		if(null!=tableName){
+		if(null!=className){
 		if(nullFlag){
-		sb.append(",tableName=").append(tableName);
+		sb.append(",className=").append(className);
 		}else {
-		sb.append("tableName=").append(tableName);
+		sb.append("className=").append(className);
 		nullFlag=true;
 		}
 		}
-		if(null!=columnName){
+		if(null!=fieldName){
 		if(nullFlag){
-		sb.append(",columnName=").append(columnName);
+		sb.append(",fieldName=").append(fieldName);
 		}else {
-		sb.append("columnName=").append(columnName);
+		sb.append("fieldName=").append(fieldName);
 		nullFlag=true;
 		}
 		}
-		if(null!=databaseValue){
+		if(null!=primaryKeyId){
 		if(nullFlag){
-		sb.append(",databaseValue=").append(databaseValue);
+		sb.append(",primaryKeyId=").append(primaryKeyId);
 		}else {
-		sb.append("databaseValue=").append(databaseValue);
+		sb.append("primaryKeyId=").append(primaryKeyId);
 		nullFlag=true;
 		}
 		}
-		if(null!=meaning){
+		if(null!=beforeValue){
 		if(nullFlag){
-		sb.append(",meaning=").append(meaning);
+		sb.append(",beforeValue=").append(beforeValue);
 		}else {
-		sb.append("meaning=").append(meaning);
+		sb.append("beforeValue=").append(beforeValue);
+		nullFlag=true;
+		}
+		}
+		if(null!=afterValue){
+		if(nullFlag){
+		sb.append(",afterValue=").append(afterValue);
+		}else {
+		sb.append("afterValue=").append(afterValue);
+		nullFlag=true;
+		}
+		}
+		if(null!=operatorId){
+		if(nullFlag){
+		sb.append(",operatorId=").append(operatorId);
+		}else {
+		sb.append("operatorId=").append(operatorId);
+		nullFlag=true;
+		}
+		}
+		if(null!=comment){
+		if(nullFlag){
+		sb.append(",comment=").append(comment);
+		}else {
+		sb.append("comment=").append(comment);
 		nullFlag=true;
 		}
 		}

@@ -3,8 +3,9 @@ package com.msh.fastdevelop.sys.service.service.impl;;
 import com.msh.fastdevelop.sys.client.po.AuthorityPO;
 import com.msh.fastdevelop.sys.client.po.ColumnDictPO;
 import com.msh.fastdevelop.sys.client.qo.AuthorityQO;
+import com.msh.fastdevelop.sys.client.qo.ColumnDictQO;
 import com.msh.fastdevelop.sys.service.service.AuthorityService;
-import com.msh.fastdevelop.sys.service.wrapper.CacheWrapper;
+import com.msh.fastdevelop.sys.service.service.ColumnDictService;
 import com.msh.frame.client.base.BaseServiceImpl;
 import com.msh.fastdevelop.sys.client.po.AuthorityUrlPO;
 import com.msh.fastdevelop.sys.client.qo.AuthorityUrlQO;
@@ -13,7 +14,6 @@ import com.msh.fastdevelop.sys.service.dao.AuthorityUrlDao;
 import com.msh.fastdevelop.sys.service.service.AuthorityUrlService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,28 +34,16 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
     @Autowired
     private AuthorityUrlService authorityUrlService;
     @Autowired
-    private CacheWrapper cacheWrapper;
-    @Autowired
     private AuthorityService authorityService;
+    @Autowired
+    private ColumnDictService columnDictService;
 
     @Override
     public CommonResult<List<AuthorityUrlPO>> list(AuthorityUrlQO param) {
-        param.setEgtStatus(0);
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
-    }
-
-    @Override
-    public CommonResult<Boolean> insert(AuthorityUrlPO param) {
-        CommonResult<Boolean> commonResult = super.insert(param);
-        cacheWrapper.clearUrlAuthIdMap();
-        return commonResult;
-    }
-
-    @Override
-    public CommonResult<Boolean> insertCollection(Collection<AuthorityUrlPO> param) {
-        CommonResult<Boolean> commonResult = super.insertCollection(param);
-        cacheWrapper.clearUrlAuthIdMap();
-        return commonResult;
     }
 
     @Override
@@ -68,19 +56,6 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
         }
     }
 
-    @Override
-    public CommonResult<Boolean> update(AuthorityUrlPO param) {
-        CommonResult<Boolean> commonResult = super.update(param);
-        cacheWrapper.clearUrlAuthIdMap();
-        return commonResult;
-    }
-
-    @Override
-    public CommonResult<Boolean> delete(long param) {
-        CommonResult<Boolean> commonResult = super.delete(param);
-        cacheWrapper.clearUrlAuthIdMap();
-        return commonResult;
-    }
 
     @Override
     public CommonResult<List<AuthorityUrlVO>> listAuthorityUrlVO(AuthorityUrlQO param) {
@@ -115,7 +90,10 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
     }
 
     private void setLinkAuth(List<AuthorityUrlVO> authorityUrlVOList){
-        List<ColumnDictPO> dictList = cacheWrapper.getDictList("sys_authority_url", "link_auth");
+        ColumnDictQO columnDictQO = new ColumnDictQO();
+        columnDictQO.setTableName("sys_authority_url");
+        columnDictQO.setColumnName("link_auth");
+        List<ColumnDictPO> dictList = columnDictService.list(columnDictQO).getResult();
         Map<Integer,String> dictMap = new HashMap<>();
         for(ColumnDictPO columnDictPO: dictList){
             dictMap.put(columnDictPO.getDatabaseValue(),columnDictPO.getMeaning());
@@ -137,6 +115,21 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
                 map.put(authorityId, list);
             }
             list.add(authorityUrlVO);
+        }
+        return CommonResult.successReturn(map);
+    }
+
+    @Override
+    public CommonResult<Map<String, Integer>> getUrlAuthIdMap() {
+        Map<String, Integer> map ;
+        List<AuthorityUrlPO> authorityUrlPOList = authorityUrlService.list(new AuthorityUrlQO()).getResult();
+        if(null == authorityUrlPOList){
+            map = CollectionUtils.EMPTY_MAP;
+        }else {
+            map = new HashMap<>(authorityUrlPOList.size()*2);
+            for(AuthorityUrlPO authorityUrlPO: authorityUrlPOList){
+                map.put(authorityUrlPO.getUrl(),authorityUrlPO.getLinkAuth());
+            }
         }
         return CommonResult.successReturn(map);
     }

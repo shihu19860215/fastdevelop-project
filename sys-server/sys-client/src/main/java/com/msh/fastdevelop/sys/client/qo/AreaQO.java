@@ -38,15 +38,6 @@ public class AreaQO extends BaseQO {
 	@ApiModelProperty("区域")
 	private String area;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
-
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
 

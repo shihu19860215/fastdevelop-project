@@ -1,7 +1,8 @@
 package com.msh.fastdevelop.sys.service.service.impl;;
 
 import com.msh.fastdevelop.sys.client.po.ColumnDictPO;
-import com.msh.fastdevelop.sys.service.wrapper.CacheWrapper;
+import com.msh.fastdevelop.sys.client.qo.ColumnDictQO;
+import com.msh.fastdevelop.sys.service.service.ColumnDictService;
 import com.msh.frame.client.base.BaseServiceImpl;
 import com.msh.fastdevelop.sys.client.po.AuthorityPO;
 import com.msh.fastdevelop.sys.client.qo.AuthorityQO;
@@ -10,7 +11,6 @@ import com.msh.fastdevelop.sys.service.dao.AuthorityDao;
 import com.msh.fastdevelop.sys.service.service.AuthorityService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,13 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     @Autowired
     private AuthorityService authorityService;
     @Autowired
-    private CacheWrapper cacheWrapper;
+    private ColumnDictService columnDictService;
 
     @Override
     public CommonResult<List<AuthorityPO>> list(AuthorityQO param) {
-        param.setEgtStatus(0);
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
     }
 
@@ -120,7 +122,10 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     }
 
     private void setTypeMeaning(List<AuthorityVO> authorityVOList){
-        List<ColumnDictPO> columnDictPOList = cacheWrapper.getDictList("sys_authority", "type");
+        ColumnDictQO columnDictQO = new ColumnDictQO();
+        columnDictQO.setTableName("sys_authority");
+        columnDictQO.setColumnName("type");
+        List<ColumnDictPO> columnDictPOList = columnDictService.list(columnDictQO).getResult();
         Map<Integer, String> map = new HashMap<>();
         for(ColumnDictPO columnDictPO: columnDictPOList){
             map.put(columnDictPO.getDatabaseValue(), columnDictPO.getMeaning());

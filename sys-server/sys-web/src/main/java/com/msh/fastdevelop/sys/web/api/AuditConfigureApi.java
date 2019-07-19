@@ -2,10 +2,10 @@ package com.msh.fastdevelop.sys.web.api;
 
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.web.base.BaseController;
-import com.msh.fastdevelop.sys.client.po.AreaPO;
-import com.msh.fastdevelop.sys.client.qo.AreaQO;
-import com.msh.fastdevelop.sys.client.vo.AreaVO;
-import com.msh.fastdevelop.sys.service.service.AreaService;
+import com.msh.fastdevelop.sys.client.po.AuditConfigurePO;
+import com.msh.fastdevelop.sys.client.qo.AuditConfigureQO;
+import com.msh.fastdevelop.sys.client.vo.AuditConfigureVO;
+import com.msh.fastdevelop.sys.service.service.AuditConfigureService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,16 @@ import java.util.List;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-24 20:24:20
+ * @date 2019-06-29 14:15:29
  */
-@Api(description = "行政区域规划码-api相关接口")
+@Api(description = "-api相关接口")
 @Slf4j
 @RestController
-@RequestMapping("/api/sys/area")
-public class AreaApi extends BaseController<AreaPO, AreaQO> {
+@RequestMapping("/api/sys/auditconfigure")
+public class AuditConfigureApi extends BaseController<AuditConfigurePO, AuditConfigureQO> {
 
     @Autowired
-    private AreaService areaService;
+    private AuditConfigureService auditConfigureService;
 
     /**
      * 通用查询逻辑
@@ -37,9 +37,8 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
      */
     @ApiOperation(value = "通用查询逻辑", httpMethod = "GET", notes = "通用查询逻辑")
     @RequestMapping("list")
-    public CommonResult<List<AreaPO>> list(@ModelAttribute("pojo")AreaQO q) {
-        CommonResult<List<AreaPO>> query = areaService.list(q);
-        query.setCount(areaService.count(q).getResult());
+    public CommonResult<List<AuditConfigurePO>> list(@ModelAttribute("pojo")AuditConfigureQO q) {
+        CommonResult<List<AuditConfigurePO>> query = auditConfigureService.list(q);
         return query;
     }
 
@@ -49,8 +48,8 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
      */
     @ApiOperation(value = "获取详情", httpMethod = "GET", notes = "获取详情")
     @RequestMapping("get")
-    public CommonResult<AreaPO> get(@RequestParam("id") Long id) {
-        return areaService.get(id);
+    public CommonResult<AuditConfigurePO> get(@RequestParam("id") Long id) {
+        return auditConfigureService.get(id);
     }
 
     /**
@@ -60,8 +59,8 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
      */
     @ApiOperation(value = "通用更新逻辑", httpMethod = "POST", notes = "通用更新逻辑")
     @RequestMapping("update")
-    public CommonResult<Boolean> update(@RequestBody AreaPO t) {
-        return areaService.update(t);
+    public CommonResult<Boolean> update(@RequestBody AuditConfigurePO t) {
+        return auditConfigureService.update(t);
     }
 
     /**
@@ -72,7 +71,7 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
     @ApiOperation(value = "通用删除逻辑", httpMethod = "GET", notes = "通用删除逻辑")
     @RequestMapping("delete")
     public CommonResult<Boolean> delete(@RequestParam("id") Long id) {
-        return areaService.delete(id);
+        return auditConfigureService.delete(id);
     }
 
     /**
@@ -82,8 +81,8 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
      */
     @ApiOperation(value = "通用插入逻辑", httpMethod = "POST", notes = "通用插入逻辑")
     @RequestMapping("insert")
-    public CommonResult<Boolean> insert(@RequestBody AreaPO t) {
-        return areaService.insert(t);
+    public CommonResult<Boolean> insert(@RequestBody AuditConfigurePO t) {
+        return auditConfigureService.insert(t);
     }
 
 
@@ -91,16 +90,13 @@ public class AreaApi extends BaseController<AreaPO, AreaQO> {
     @ApiOperation(value = "逻辑删除", httpMethod = "GET", notes = "逻辑删除")
     @RequestMapping("logicdelete")
     public CommonResult<Boolean> logicDelete(@RequestParam("id") Long id) {
-        return areaService.logicDelete(id);
+        return auditConfigureService.logicDelete(id);
     }
 
 
     @ApiOperation(value = "vo列表查询", httpMethod = "GET", notes = "vo列表查询")
     @RequestMapping("listvo")
-    public CommonResult<List<AreaVO>> listAreaVO(@ModelAttribute("pojo")AreaQO q) {
-        q.setEgtStatus(0);
-        CommonResult<List<AreaVO>> listCommonResult = areaService.listAreaVO(q);
-        listCommonResult.setCount(areaService.count(q).getResult());
-        return listCommonResult;
+    public CommonResult<List<AuditConfigureVO>> listAuditConfigureVO(@ModelAttribute("pojo")AuditConfigureQO q) {
+        return auditConfigureService.listAuditConfigureVO(q);
     }
 }

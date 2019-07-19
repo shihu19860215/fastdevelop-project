@@ -17,5 +17,5 @@ public interface RoleAuthorityMappingService extends BaseService<RoleAuthorityMa
         CommonResult<Boolean> logicDelete(Long id);
         CommonResult<List<RoleAuthorityMappingVO>> listRoleAuthorityMappingVO(RoleAuthorityMappingQO param);
         CommonResult<Boolean> updateRoleAuth(RoleVO roleVO);
-        public CommonResult<Boolean> deleteByUserId(long param);
+        CommonResult<Boolean> deleteByUserId(long param);
 }

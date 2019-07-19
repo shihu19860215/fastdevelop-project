@@ -8,15 +8,12 @@ import com.msh.fastdevelop.sys.service.dao.ColumnDictDao;
 import com.msh.fastdevelop.sys.service.service.ColumnDictService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -34,18 +31,10 @@ public class ColumnDictServiceImpl extends BaseServiceImpl<ColumnDictPO,ColumnDi
 
     @Override
     public CommonResult<List<ColumnDictPO>> list(ColumnDictQO param) {
-        param.setEgtStatus(0);
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
-    }
-
-    @Override
-    public CommonResult<Boolean> insert(ColumnDictPO param) {
-        return super.insert(param);
-    }
-
-    @Override
-    public CommonResult<Boolean> insertCollection(Collection<ColumnDictPO> param) {
-        return super.insertCollection(param);
     }
 
     @Override

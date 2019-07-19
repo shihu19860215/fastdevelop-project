@@ -34,17 +34,6 @@ public class AuthorityPO extends BasePO{
 	@ApiModelProperty("图标")
 	private String icon;
 
-	@ApiModelProperty("状态")
-	private Integer status;
-
-	@ApiModelProperty("更新版本")
-	private Integer updateVersion;
-
-	@ApiModelProperty("创建时间")
-	private Date createTime;
-
-	@ApiModelProperty("更新时间")
-	private Date updateTime;
 
 
 	public void setName(String value) {
@@ -103,37 +92,6 @@ public class AuthorityPO extends BasePO{
 		return this.icon;
 	}
 
-	public void setStatus(Integer value) {
-		this.status = value;
-	}
-
-	public Integer getStatus() {
-		return this.status;
-	}
-
-	public void setUpdateVersion(Integer value) {
-		this.updateVersion = value;
-	}
-
-	public Integer getUpdateVersion() {
-		return this.updateVersion;
-	}
-
-	public void setCreateTime(Date value) {
-		this.createTime = value;
-	}
-
-	public Date getCreateTime() {
-		return this.createTime;
-	}
-
-	public void setUpdateTime(Date value) {
-		this.updateTime = value;
-	}
-
-	public Date getUpdateTime() {
-		return this.updateTime;
-	}
 
 
 	@Override

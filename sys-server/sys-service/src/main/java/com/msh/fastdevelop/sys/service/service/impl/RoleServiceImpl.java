@@ -39,7 +39,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RolePO,RoleQO> implements R
 
     @Override
     public CommonResult<List<RolePO>> list(RoleQO param) {
-        param.setEgtStatus(0);
+        if(null == param.getStatus()){
+            param.setEgtStatus(0);
+        }
         return super.list(param);
     }
 
