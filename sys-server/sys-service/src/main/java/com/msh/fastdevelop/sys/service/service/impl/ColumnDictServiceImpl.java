@@ -6,20 +6,24 @@ import com.msh.fastdevelop.sys.client.qo.ColumnDictQO;
 import com.msh.fastdevelop.sys.client.vo.ColumnDictVO;
 import com.msh.fastdevelop.sys.service.dao.ColumnDictDao;
 import com.msh.fastdevelop.sys.service.service.ColumnDictService;
+import com.msh.fastdevelop.sys.service.service.*;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
+import com.msh.frame.common.common.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-19 20:58:20
+ * @date 2019-07-22 14:50:38
  */
 @Service
 @Slf4j
@@ -28,13 +32,39 @@ public class ColumnDictServiceImpl extends BaseServiceImpl<ColumnDictPO,ColumnDi
     private ColumnDictDao columnDictDao;
     @Autowired
     private ColumnDictService columnDictService;
+    @Autowired
+    private IdGenerateable idGenerateable;
+    @Autowired
+    private AuditService auditService;
+
+    @Override
+    public CommonResult<Boolean> update(ColumnDictPO param) {
+        ColumnDictPO parmDB = columnDictService.get(param.getId()).getResult();
+        auditService.audit(param, parmDB);
+        return super.update(param);
+    }
 
     @Override
     public CommonResult<List<ColumnDictPO>> list(ColumnDictQO param) {
-        if(null == param.getStatus()){
+        if(null != param.getStatus()){
             param.setEgtStatus(0);
         }
         return super.list(param);
+    }
+
+    @Override
+    public CommonResult<Boolean> insert(ColumnDictPO param) {
+        param.setId(idGenerateable.getUniqueID());
+        return super.insert(param);
+    }
+
+    @Override
+    public CommonResult<Boolean> insertCollection(Collection<ColumnDictPO> param) {
+        Iterator<ColumnDictPO> iterator = param.iterator();
+        while(iterator.hasNext()){
+            iterator.next().setId(idGenerateable.getUniqueID());
+        }
+        return super.insertCollection(param);
     }
 
     @Override

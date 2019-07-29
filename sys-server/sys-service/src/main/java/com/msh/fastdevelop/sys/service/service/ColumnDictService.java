@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-19 20:58:20
+ * @date 2019-07-22 14:50:38
  */
 public interface ColumnDictService extends BaseService<ColumnDictPO,ColumnDictQO> {
         CommonResult<Boolean> logicDelete(Long id);

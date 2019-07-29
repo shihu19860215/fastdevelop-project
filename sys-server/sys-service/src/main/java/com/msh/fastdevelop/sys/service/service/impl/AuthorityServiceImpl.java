@@ -2,7 +2,10 @@ package com.msh.fastdevelop.sys.service.service.impl;;
 
 import com.msh.fastdevelop.sys.client.po.ColumnDictPO;
 import com.msh.fastdevelop.sys.client.qo.ColumnDictQO;
+import com.msh.fastdevelop.sys.client.qo.ColumnInfoQO;
+import com.msh.fastdevelop.sys.client.vo.ColumnInfoVO;
 import com.msh.fastdevelop.sys.service.service.ColumnDictService;
+import com.msh.fastdevelop.sys.service.service.ColumnInfoService;
 import com.msh.frame.client.base.BaseServiceImpl;
 import com.msh.fastdevelop.sys.client.po.AuthorityPO;
 import com.msh.fastdevelop.sys.client.qo.AuthorityQO;
@@ -31,7 +34,7 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     @Autowired
     private AuthorityService authorityService;
     @Autowired
-    private ColumnDictService columnDictService;
+    private ColumnInfoService columnInfoService;
 
     @Override
     public CommonResult<List<AuthorityPO>> list(AuthorityQO param) {
@@ -122,12 +125,9 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     }
 
     private void setTypeMeaning(List<AuthorityVO> authorityVOList){
-        ColumnDictQO columnDictQO = new ColumnDictQO();
-        columnDictQO.setTableName("sys_authority");
-        columnDictQO.setColumnName("type");
-        List<ColumnDictPO> columnDictPOList = columnDictService.list(columnDictQO).getResult();
+        ColumnInfoVO columnInfoVO = columnInfoService.getColumnInfoVO("sys_authority_url","link_auth").getResult();
         Map<Integer, String> map = new HashMap<>();
-        for(ColumnDictPO columnDictPO: columnDictPOList){
+        for(ColumnDictPO columnDictPO: columnInfoVO.getColumnDictPOList()){
             map.put(columnDictPO.getDatabaseValue(), columnDictPO.getMeaning());
         }
         for(AuthorityVO authorityVO: authorityVOList){
