@@ -200,6 +200,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
 
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(userPO.getId());
+        userInfo.setTel(userPO.getTel());
         userInfo.setNickName(userPO.getNickname());
         Set<Long> authIds = null;
         UserRoleMappingQO userRoleMappingQO = new UserRoleMappingQO();

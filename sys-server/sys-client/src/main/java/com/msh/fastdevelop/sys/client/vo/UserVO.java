@@ -12,7 +12,7 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-18 20:51:33
+ * @date 2019-11-14 16:17:56
  */
 @ApiModel
 @Data
@@ -24,6 +24,7 @@ public class UserVO extends UserPO {
 	public UserVO(UserPO userPO){
 		this.setId(userPO.getId());
 		this.setUsername(userPO.getUsername());
+		this.setTel(userPO.getTel());
 		this.setNickname(userPO.getNickname());
 		this.setStatus(userPO.getStatus());
 		this.setUpdateVersion(userPO.getUpdateVersion());

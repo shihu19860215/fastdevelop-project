@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-18 20:51:33
+ * @date 2019-11-14 16:17:56
  */
 @ApiModel
 @Data
@@ -20,8 +20,23 @@ public class UserQO extends BaseQO {
 	@ApiModelProperty("密码")
 	private String password;
 
+	@ApiModelProperty("手机号码")
+	private String tel;
+
 	@ApiModelProperty("昵称")
 	private String nickname;
+
+	@ApiModelProperty("状态")
+	private Integer status;
+
+	@ApiModelProperty("更新版本")
+	private Integer updateVersion;
+
+	@ApiModelProperty("创建时间")
+	private Date createTime;
+
+	@ApiModelProperty("更新时间")
+	private Date updateTime;
 
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
@@ -52,6 +67,14 @@ public class UserQO extends BaseQO {
 		sb.append(",password=").append(password);
 		}else {
 		sb.append("password=").append(password);
+		nullFlag=true;
+		}
+		}
+		if(null!=tel){
+		if(nullFlag){
+		sb.append(",tel=").append(tel);
+		}else {
+		sb.append("tel=").append(tel);
 		nullFlag=true;
 		}
 		}

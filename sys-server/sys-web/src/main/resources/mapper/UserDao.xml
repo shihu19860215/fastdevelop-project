@@ -8,6 +8,7 @@
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="tel" column="tel"/>
         <result property="nickname" column="nickname"/>
         <result property="status" column="status"/>
         <result property="updateVersion" column="update_version"/>
@@ -16,7 +17,7 @@
     </resultMap>
 
     <sql id="base_column_list">
-        id,username,password,nickname,status,update_version,create_time,update_time
+        id,username,password,tel,nickname,status,update_version,create_time,update_time
     </sql>
 
 
@@ -25,6 +26,7 @@
             <if test="id != null">AND id = #{id}</if>
             <if test="username != null">AND username = #{username}</if>
             <if test="password != null">AND password = #{password}</if>
+            <if test="tel != null">AND tel = #{tel}</if>
             <if test="nickname != null">AND nickname = #{nickname}</if>
             <if test="status != null">AND status = #{status}</if>
             <if test="updateVersion != null">AND update_version = #{updateVersion}</if>
@@ -62,6 +64,7 @@
             <if test="id != null">id,</if>
             <if test="username != null">username,</if>
             <if test="password != null">password,</if>
+            <if test="tel != null">tel,</if>
             <if test="nickname != null">nickname,</if>
             <if test="status != null">status,</if>
             update_version,
@@ -70,6 +73,7 @@
             <if test="id != null">#{id},</if>
             <if test="username != null">#{username},</if>
             <if test="password != null">#{password},</if>
+            <if test="tel != null">#{tel},</if>
             <if test="nickname != null">#{nickname},</if>
             <if test="status != null">#{status},</if>
             1,
@@ -78,10 +82,10 @@
 
     <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.UserPO" useGeneratedKeys="true" keyProperty="id">
         insert into sys_user
-        (id,username,password,nickname,status,update_version)
+        (id,username,password,tel,nickname,status,update_version)
         values
         <foreach collection="list" index="index" separator="," item="item">
-            (#{item.id},#{item.username},#{item.password},#{item.nickname},#{item.status},1)
+            (#{item.id},#{item.username},#{item.password},#{item.tel},#{item.nickname},#{item.status},1)
         </foreach>
     </insert>
 
@@ -93,6 +97,9 @@
             </if>
             <if test="password != null">
                 password = #{password},
+            </if>
+            <if test="tel != null">
+                tel = #{tel},
             </if>
             <if test="nickname != null">
                 nickname = #{nickname},

@@ -13,6 +13,8 @@ public class UserInfo {
     private Long userId;
     @ApiModelProperty("昵称")
     private String nickName;
+    @ApiModelProperty("手机号码")
+    private String tel;
     @ApiModelProperty("权限id")
     private Set<Long> authIds;
     @ApiModelProperty("url权限")
