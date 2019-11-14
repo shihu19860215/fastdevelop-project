@@ -79,7 +79,7 @@ public class AuditServiceImpl extends BaseServiceImpl<AuditPO,AuditQO> implement
     @Override
     public CommonResult<List<AuditVO>> listAuditVO(AuditQO param) {
         List<AuditPO> auditPOList = auditService.list(param).getResult();
-        if(null == auditPOList || auditPOList.size() == 0) {
+        if(auditPOList.isEmpty()) {
             return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
         }
         List<AuditVO> auditVOList = new ArrayList<>(auditPOList.size());
@@ -87,8 +87,24 @@ public class AuditServiceImpl extends BaseServiceImpl<AuditPO,AuditQO> implement
             AuditVO auditVO = new AuditVO(auditPO);
             auditVOList.add(auditVO);
         }
+        this.setMeaning(auditVOList);
 
         return CommonResult.successReturn(auditVOList);
+    }
+
+    private void setMeaning(List<AuditVO> auditVOList){
+        AuditConfigureQO auditConfigureQO = new AuditConfigureQO();
+        List<AuditConfigurePO> auditConfigurePOList = auditConfigureService.list(auditConfigureQO).getResult();
+        final Map<String, AuditConfigurePO> map = new HashMap<>();
+        auditConfigurePOList.forEach(auditConfigurePO -> {
+            map.put(auditConfigurePO.getClassName()+auditConfigurePO.getFieldName(), auditConfigurePO);
+        });
+        auditVOList.forEach(auditVO -> {
+            AuditConfigurePO auditConfigurePO = map.get(auditVO.getClassName() + auditVO.getFieldName());
+            if(null != auditConfigurePO){
+                auditVO.setMeaning(auditConfigurePO.getMeaning());
+            }
+        });
     }
 
     @Override

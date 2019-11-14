@@ -9,22 +9,31 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-19 20:58:20
+ * @date 2019-07-22 17:48:38
  */
 @ApiModel
 @Data
 public class ColumnDictQO extends BaseQO {
-	@ApiModelProperty("表名")
-	private String tableName;
-
-	@ApiModelProperty("字段名")
-	private String columnName;
+	@ApiModelProperty("字段id")
+	private Long columnId;
 
 	@ApiModelProperty("数据库值")
 	private Integer databaseValue;
 
 	@ApiModelProperty("实际意思")
 	private String meaning;
+
+	@ApiModelProperty("状态")
+	private Integer status;
+
+	@ApiModelProperty("更新版本")
+	private Integer updateVersion;
+
+	@ApiModelProperty("创建时间")
+	private Date createTime;
+
+	@ApiModelProperty("更新时间")
+	private Date updateTime;
 
     @ApiModelProperty("大于等于status")
     private Integer egtStatus;
@@ -42,19 +51,11 @@ public class ColumnDictQO extends BaseQO {
 		nullFlag=true;
 		}
 		}
-		if(null!=tableName){
+		if(null!=columnId){
 		if(nullFlag){
-		sb.append(",tableName=").append(tableName);
+		sb.append(",columnId=").append(columnId);
 		}else {
-		sb.append("tableName=").append(tableName);
-		nullFlag=true;
-		}
-		}
-		if(null!=columnName){
-		if(nullFlag){
-		sb.append(",columnName=").append(columnName);
-		}else {
-		sb.append("columnName=").append(columnName);
+		sb.append("columnId=").append(columnId);
 		nullFlag=true;
 		}
 		}

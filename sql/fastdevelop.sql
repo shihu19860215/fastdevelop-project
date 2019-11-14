@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50629
 File Encoding         : 65001
 
-Date: 2019-07-19 13:25:23
+Date: 2019-07-29 17:52:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3457,7 +3457,7 @@ CREATE TABLE `sys_audit_configure` (
   `id` bigint(20) unsigned NOT NULL COMMENT '主键id',
   `class_name` varchar(32) NOT NULL COMMENT '类名',
   `field_name` varchar(32) NOT NULL COMMENT '字段名',
-  `meaning` varchar(32) NOT NULL COMMENT '实际意思',
+  `meaning` varchar(32) NOT NULL COMMENT '字段意思',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
   `update_version` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '更新版本',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -3489,7 +3489,7 @@ CREATE TABLE `sys_authority` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_authority
@@ -3509,7 +3509,7 @@ INSERT INTO `sys_authority` VALUES ('12', '用户列表删除按钮', 'userListD
 INSERT INTO `sys_authority` VALUES ('13', '用户列表启用停用按钮', 'userListStartStopButton', '4', '4', '2', '5', '', '1', '1', '2019-06-24 16:30:03', '2019-06-24 16:30:03');
 INSERT INTO `sys_authority` VALUES ('14', '工具箱', 'tool', '0', '1', '1', '20', 'el-icon-s-cooperation', '1', '2', '2019-06-24 20:21:35', '2019-06-24 20:24:37');
 INSERT INTO `sys_authority` VALUES ('15', '区域列表', 'arealist', '14', '2', '1', '1', '', '1', '2', '2019-06-24 20:25:08', '2019-06-24 20:26:09');
-INSERT INTO `sys_authority` VALUES ('16', '字段字典列表', 'columndictlist', '14', '2', '1', '2', '', '1', '1', '2019-06-25 10:14:05', '2019-06-25 10:14:05');
+INSERT INTO `sys_authority` VALUES ('16', '字段信息详情', 'columndictlist', '41', '3', '3', '1', '', '1', '3', '2019-06-25 10:14:05', '2019-07-22 17:56:15');
 INSERT INTO `sys_authority` VALUES ('17', '审计系统', 'audit', '14', '2', '1', '3', '', '1', '1', '2019-06-29 14:12:50', '2019-06-29 14:12:50');
 INSERT INTO `sys_authority` VALUES ('18', '审计列表', 'auditlist', '17', '3', '1', '1', '', '1', '1', '2019-06-29 14:13:08', '2019-06-29 14:13:08');
 INSERT INTO `sys_authority` VALUES ('19', '审计配置列表', 'auditconfigurelist', '17', '3', '1', '2', '', '1', '1', '2019-06-29 14:13:28', '2019-06-29 14:13:28');
@@ -3533,6 +3533,7 @@ INSERT INTO `sys_authority` VALUES ('36', '审计列表配置删除按钮', 'aud
 INSERT INTO `sys_authority` VALUES ('37', '审计列表配置启用停用按钮', 'auditlistConfigStartStopButton', '19', '4', '2', '5', '', '1', '1', '2019-07-16 14:28:04', '2019-07-16 14:28:04');
 INSERT INTO `sys_authority` VALUES ('38', '区域别表页面', 'arealistPage', '15', '3', '3', '1', '', '1', '1', '2019-07-17 17:04:34', '2019-07-17 17:04:34');
 INSERT INTO `sys_authority` VALUES ('39', '区域列表启用禁用按钮', 'arealistEnableDisableButton', '15', '3', '2', '2', '', '1', '1', '2019-07-17 17:05:31', '2019-07-17 17:05:31');
+INSERT INTO `sys_authority` VALUES ('41', '字段信息列表', 'columnInfoList', '14', '2', '1', '2', '', '1', '3', '2019-07-22 17:26:40', '2019-07-22 17:56:38');
 
 -- ----------------------------
 -- Table structure for `sys_authority_url`
@@ -3591,36 +3592,37 @@ INSERT INTO `sys_authority_url` VALUES ('31', '39', '/api/sys/area/update', '1',
 DROP TABLE IF EXISTS `sys_column_dict`;
 CREATE TABLE `sys_column_dict` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `table_name` varchar(50) NOT NULL COMMENT '表名',
-  `column_name` varchar(20) NOT NULL COMMENT '字段名',
-  `database_value` tinyint(4) NOT NULL COMMENT '数据库值',
+  `column_id` bigint(20) NOT NULL COMMENT '字段id',
+  `database_value` tinyint(4) unsigned NOT NULL COMMENT '数据库值',
   `meaning` varchar(20) NOT NULL COMMENT '实际意思',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
   `update_version` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新版本',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unq_table_column_value` (`table_name`,`column_name`,`database_value`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  KEY `idx_column_id` (`column_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1907226483710000003 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_column_dict
 -- ----------------------------
-INSERT INTO `sys_column_dict` VALUES ('1', 'sys_authority', 'type', '1', '菜单', '1', '6', '2019-06-02 16:05:30', '2019-07-17 16:54:49');
-INSERT INTO `sys_column_dict` VALUES ('2', 'sys_authority', 'type', '2', '按钮', '1', '0', '2019-06-02 16:07:37', '2019-06-08 08:50:35');
-INSERT INTO `sys_column_dict` VALUES ('3', 'sys_authority', 'type', '3', '页面', '1', '0', '2019-06-02 16:12:20', '2019-06-08 08:50:36');
-INSERT INTO `sys_column_dict` VALUES ('4', 'sys_authority_url', 'link_auth', '1', '拥有权限可访问', '1', '2', '2019-06-02 16:45:09', '2019-07-17 15:49:34');
-INSERT INTO `sys_column_dict` VALUES ('5', 'sys_authority_url', 'link_auth', '2', '用户登录可访问', '1', '4', '2019-06-02 16:45:15', '2019-07-17 15:52:47');
-INSERT INTO `sys_column_dict` VALUES ('6', 'sys_authority_url', 'link_auth', '3', '无需登录可访问', '1', '8', '2019-06-02 16:45:42', '2019-07-17 15:52:49');
-INSERT INTO `sys_column_dict` VALUES ('7', 'sys_authority_url', 'link_auth', '4', '登录', '1', '0', '2019-06-08 09:58:14', '2019-06-08 09:58:24');
-INSERT INTO `sys_column_dict` VALUES ('8', 'sys_authority_url', 'link_auth', '5', '登出', '1', '0', '2019-06-08 09:58:26', '2019-06-08 09:58:36');
+INSERT INTO `sys_column_dict` VALUES ('1', '1', '1', '菜单', '1', '8', '2019-06-02 16:05:30', '2019-07-22 17:51:26');
+INSERT INTO `sys_column_dict` VALUES ('2', '1', '2', '按钮', '1', '0', '2019-06-02 16:07:37', '2019-07-22 14:49:13');
+INSERT INTO `sys_column_dict` VALUES ('3', '1', '3', '页面', '1', '0', '2019-06-02 16:12:20', '2019-07-22 14:49:18');
+INSERT INTO `sys_column_dict` VALUES ('4', '2', '1', '拥有权限可访问', '1', '2', '2019-06-02 16:45:09', '2019-07-22 14:49:19');
+INSERT INTO `sys_column_dict` VALUES ('5', '2', '2', '用户登录可访问', '1', '4', '2019-06-02 16:45:15', '2019-07-22 14:49:20');
+INSERT INTO `sys_column_dict` VALUES ('6', '2', '3', '无需登录可访问', '1', '8', '2019-06-02 16:45:42', '2019-07-22 14:49:21');
+INSERT INTO `sys_column_dict` VALUES ('7', '2', '4', '登录', '1', '0', '2019-06-08 09:58:14', '2019-07-22 14:49:21');
+INSERT INTO `sys_column_dict` VALUES ('8', '2', '5', '登出', '1', '0', '2019-06-08 09:58:26', '2019-07-22 14:49:23');
+INSERT INTO `sys_column_dict` VALUES ('1907226483110000001', '1907226482110000000', '1', '男', '1', '1', '2019-07-22 18:00:36', '2019-07-22 18:00:36');
+INSERT INTO `sys_column_dict` VALUES ('1907226483710000002', '1907226482110000000', '2', '女', '1', '1', '2019-07-22 18:00:42', '2019-07-22 18:00:42');
 
 -- ----------------------------
 -- Table structure for `sys_column_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_column_info`;
 CREATE TABLE `sys_column_info` (
-  `id` bigint(20) unsigned NOT NULL COMMENT '主键id',
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `table_name` varchar(50) NOT NULL COMMENT '表名',
   `column_name` varchar(20) NOT NULL COMMENT '字段名',
   `title` varchar(20) NOT NULL COMMENT '标题',
@@ -3629,11 +3631,14 @@ CREATE TABLE `sys_column_info` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1907226482110000001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_column_info
 -- ----------------------------
+INSERT INTO `sys_column_info` VALUES ('1', 'sys_authority', 'type', '权限类型', '1', '1', '2019-07-22 14:22:46', '2019-07-22 14:22:46');
+INSERT INTO `sys_column_info` VALUES ('2', 'sys_authority_url', 'link_auth', 'url权限类型', '1', '1', '2019-07-22 14:23:21', '2019-07-22 14:23:21');
+INSERT INTO `sys_column_info` VALUES ('1907226482110000000', 'System', 'sex', '性别', '1', '1', '2019-07-22 18:00:27', '2019-07-22 18:00:27');
 
 -- ----------------------------
 -- Table structure for `sys_role`

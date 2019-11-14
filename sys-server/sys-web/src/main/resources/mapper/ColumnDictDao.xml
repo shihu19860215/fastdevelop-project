@@ -6,8 +6,7 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.msh.fastdevelop.sys.client.po.ColumnDictPO" id="columnDictMap">
         <result property="id" column="id"/>
-        <result property="tableName" column="table_name"/>
-        <result property="columnName" column="column_name"/>
+        <result property="columnId" column="column_id"/>
         <result property="databaseValue" column="database_value"/>
         <result property="meaning" column="meaning"/>
         <result property="status" column="status"/>
@@ -17,15 +16,14 @@
     </resultMap>
 
     <sql id="base_column_list">
-        id,table_name,column_name,database_value,meaning,status,update_version,create_time,update_time
+        id,column_id,database_value,meaning,status,update_version,create_time,update_time
     </sql>
 
 
     <sql id="base_where">
         <trim prefix="where" prefixOverrides="and|or">
             <if test="id != null">AND id = #{id}</if>
-            <if test="tableName != null">AND table_name = #{tableName}</if>
-            <if test="columnName != null">AND column_name = #{columnName}</if>
+            <if test="columnId != null">AND column_id = #{columnId}</if>
             <if test="databaseValue != null">AND database_value = #{databaseValue}</if>
             <if test="meaning != null">AND meaning = #{meaning}</if>
             <if test="status != null">AND status = #{status}</if>
@@ -62,8 +60,7 @@
         insert into sys_column_dict
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
-            <if test="tableName != null">table_name,</if>
-            <if test="columnName != null">column_name,</if>
+            <if test="columnId != null">column_id,</if>
             <if test="databaseValue != null">database_value,</if>
             <if test="meaning != null">meaning,</if>
             <if test="status != null">status,</if>
@@ -71,8 +68,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
-            <if test="tableName != null">#{tableName},</if>
-            <if test="columnName != null">#{columnName},</if>
+            <if test="columnId != null">#{columnId},</if>
             <if test="databaseValue != null">#{databaseValue},</if>
             <if test="meaning != null">#{meaning},</if>
             <if test="status != null">#{status},</if>
@@ -82,21 +78,18 @@
 
     <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.ColumnDictPO" useGeneratedKeys="true" keyProperty="id">
         insert into sys_column_dict
-        (id,table_name,column_name,database_value,meaning,status,update_version)
+        (id,column_id,database_value,meaning,status,update_version)
         values
         <foreach collection="list" index="index" separator="," item="item">
-            (#{item.id},#{item.tableName},#{item.columnName},#{item.databaseValue},#{item.meaning},#{item.status},1)
+            (#{item.id},#{item.columnId},#{item.databaseValue},#{item.meaning},#{item.status},1)
         </foreach>
     </insert>
 
     <update id="update" parameterType="com.msh.fastdevelop.sys.client.po.ColumnDictPO">
         update sys_column_dict
         <set>
-            <if test="tableName != null">
-                table_name = #{tableName},
-            </if>
-            <if test="columnName != null">
-                column_name = #{columnName},
+            <if test="columnId != null">
+                column_id = #{columnId},
             </if>
             <if test="databaseValue != null">
                 database_value = #{databaseValue},

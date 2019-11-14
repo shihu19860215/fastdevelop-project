@@ -9,15 +9,12 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-06-19 20:58:20
+ * @date 2019-07-22 14:50:38
  */
 @ApiModel
 public class ColumnDictPO extends BasePO{
-	@ApiModelProperty("表名")
-	private String tableName;
-
-	@ApiModelProperty("字段名")
-	private String columnName;
+	@ApiModelProperty("字段id")
+	private Long columnId;
 
 	@ApiModelProperty("数据库值")
 	private Integer databaseValue;
@@ -25,22 +22,25 @@ public class ColumnDictPO extends BasePO{
 	@ApiModelProperty("实际意思")
 	private String meaning;
 
+	@ApiModelProperty("状态")
+	private Integer status;
+
+	@ApiModelProperty("更新版本")
+	private Integer updateVersion;
+
+	@ApiModelProperty("创建时间")
+	private Date createTime;
+
+	@ApiModelProperty("更新时间")
+	private Date updateTime;
 
 
-	public void setTableName(String value) {
-		this.tableName = value;
+	public void setColumnId(Long value) {
+		this.columnId = value;
 	}
 
-	public String getTableName() {
-		return this.tableName;
-	}
-
-	public void setColumnName(String value) {
-		this.columnName = value;
-	}
-
-	public String getColumnName() {
-		return this.columnName;
+	public Long getColumnId() {
+		return this.columnId;
 	}
 
 	public void setDatabaseValue(Integer value) {
@@ -59,6 +59,37 @@ public class ColumnDictPO extends BasePO{
 		return this.meaning;
 	}
 
+	public void setStatus(Integer value) {
+		this.status = value;
+	}
+
+	public Integer getStatus() {
+		return this.status;
+	}
+
+	public void setUpdateVersion(Integer value) {
+		this.updateVersion = value;
+	}
+
+	public Integer getUpdateVersion() {
+		return this.updateVersion;
+	}
+
+	public void setCreateTime(Date value) {
+		this.createTime = value;
+	}
+
+	public Date getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setUpdateTime(Date value) {
+		this.updateTime = value;
+	}
+
+	public Date getUpdateTime() {
+		return this.updateTime;
+	}
 
 
 	@Override
@@ -74,19 +105,11 @@ public class ColumnDictPO extends BasePO{
 				nullFlag=true;
 			}
 		}
-		if(null!=tableName){
+		if(null!=columnId){
 			if(nullFlag){
-				sb.append(",tableName=").append(tableName);
+				sb.append(",columnId=").append(columnId);
 			}else {
-				sb.append("tableName=").append(tableName);
-				nullFlag=true;
-			}
-		}
-		if(null!=columnName){
-			if(nullFlag){
-				sb.append(",columnName=").append(columnName);
-			}else {
-				sb.append("columnName=").append(columnName);
+				sb.append("columnId=").append(columnId);
 				nullFlag=true;
 			}
 		}

@@ -15,6 +15,8 @@ import lombok.Data;
 @ApiModel
 @Data
 public class AuditVO extends AuditPO {
+	@ApiModelProperty("实际意思")
+	private String meaning;
 
 	public AuditVO(){}
 	public AuditVO(AuditPO auditPO){
