@@ -11,7 +11,7 @@ import lombok.Data;
  * @email m-sh@qq.com
  * @date 2019-06-24 20:24:20
  */
-@ApiModel
+@ApiModel("行政区域规划码")
 @Data
 public class AreaQO extends BaseQO {
 	@ApiModelProperty("行政简码")

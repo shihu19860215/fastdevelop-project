@@ -43,7 +43,7 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
 
     @Override
     public CommonResult<List<AuthorityUrlPO>> list(AuthorityUrlQO param) {
-        if(null == param.getStatus()){
+        if(null != param.getStatus()){
             param.setEgtStatus(0);
         }
         return super.list(param);
@@ -96,7 +96,7 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
         ColumnInfoVO columnInfoVO = columnInfoService.getColumnInfoVO("sys_authority_url","link_auth").getResult();
         Map<Integer,String> dictMap = new HashMap<>();
         for(ColumnDictPO columnDictPO: columnInfoVO.getColumnDictPOList()){
-            dictMap.put(columnDictPO.getDatabaseValue(),columnDictPO.getMeaning());
+            dictMap.put(columnDictPO.getValue(),columnDictPO.getMeaning());
         }
         for(AuthorityUrlVO authorityUrlVO: authorityUrlVOList){
             authorityUrlVO.setLinkAuthMeaning(dictMap.get(authorityUrlVO.getLinkAuth()));

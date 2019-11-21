@@ -38,7 +38,7 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
 
     @Override
     public CommonResult<List<AuthorityPO>> list(AuthorityQO param) {
-        if(null == param.getStatus()){
+        if(null != param.getStatus()){
             param.setEgtStatus(0);
         }
         return super.list(param);
@@ -125,10 +125,10 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     }
 
     private void setTypeMeaning(List<AuthorityVO> authorityVOList){
-        ColumnInfoVO columnInfoVO = columnInfoService.getColumnInfoVO("sys_authority_url","link_auth").getResult();
+        ColumnInfoVO columnInfoVO = columnInfoService.getColumnInfoVO("sys_authority","type").getResult();
         Map<Integer, String> map = new HashMap<>();
         for(ColumnDictPO columnDictPO: columnInfoVO.getColumnDictPOList()){
-            map.put(columnDictPO.getDatabaseValue(), columnDictPO.getMeaning());
+            map.put(columnDictPO.getValue(), columnDictPO.getMeaning());
         }
         for(AuthorityVO authorityVO: authorityVOList){
             String str = map.get(authorityVO.getType());

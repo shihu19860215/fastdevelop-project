@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.msh.fastdevelop.sys.service.dao.ColumnDictDao">
+<mapper namespace="com.msh.fastdevelop.sys.service.dao.ColumnInfoDao">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.msh.fastdevelop.sys.client.po.ColumnDictPO" id="columnDictMap">
+    <resultMap type="com.msh.fastdevelop.sys.client.po.ColumnInfoPO" id="columnInfoMap">
         <result property="id" column="id"/>
-        <result property="columnId" column="column_id"/>
-        <result property="value" column="value"/>
-        <result property="meaning" column="meaning"/>
+        <result property="tableName" column="table_name"/>
+        <result property="columnName" column="column_name"/>
+        <result property="title" column="title"/>
         <result property="status" column="status"/>
         <result property="updateVersion" column="update_version"/>
         <result property="createTime" column="create_time"/>
@@ -16,16 +16,16 @@
     </resultMap>
 
     <sql id="base_column_list">
-        id,column_id,value,meaning,status,update_version,create_time,update_time
+        id,table_name,column_name,title,status,update_version,create_time,update_time
     </sql>
 
 
     <sql id="base_where">
         <trim prefix="where" prefixOverrides="and|or">
             <if test="id != null">AND id = #{id}</if>
-            <if test="columnId != null">AND column_id = #{columnId}</if>
-            <if test="value != null">AND value = #{value}</if>
-            <if test="meaning != null">AND meaning = #{meaning}</if>
+            <if test="tableName != null">AND table_name = #{tableName}</if>
+            <if test="columnName != null">AND column_name = #{columnName}</if>
+            <if test="title != null">AND title = #{title}</if>
             <if test="status != null">AND status = #{status}</if>
             <if test="updateVersion != null">AND update_version = #{updateVersion}</if>
             <if test="createTime != null">AND create_time = #{createTime}</if>
@@ -34,68 +34,68 @@
         </trim>
     </sql>
 
-    <select id="get" resultMap="columnDictMap" parameterType="long">
+    <select id="get" resultMap="columnInfoMap" parameterType="long">
         select
         <include refid="base_column_list"/>
-        from sys_column_dict where id = #{id}
+        from sys_column_info where id = #{id}
     </select>
 
-    <select id="list" resultMap="columnDictMap"
-            parameterType="com.msh.fastdevelop.sys.client.qo.ColumnDictQO">
+    <select id="list" resultMap="columnInfoMap"
+            parameterType="com.msh.fastdevelop.sys.client.qo.ColumnInfoQO">
         select
         <include refid="base_column_list"/>
-        from sys_column_dict
+        from sys_column_info
         <include refid="base_where"/>
         <if test="page != null">
             limit #{page.firstRow},#{page.pageSize}
         </if>
     </select>
 
-    <select id="count" resultType="int" parameterType="com.msh.fastdevelop.sys.client.qo.ColumnDictQO">
-        select count(id) from sys_column_dict
+    <select id="count" resultType="int" parameterType="com.msh.fastdevelop.sys.client.qo.ColumnInfoQO">
+        select count(id) from sys_column_info
         <include refid="base_where"/>
     </select>
 
-    <insert id="insert" parameterType="com.msh.fastdevelop.sys.client.po.ColumnDictPO" useGeneratedKeys="true" keyProperty="id">
-        insert into sys_column_dict
+    <insert id="insert" parameterType="com.msh.fastdevelop.sys.client.po.ColumnInfoPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_column_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
-            <if test="columnId != null">column_id,</if>
-            <if test="value != null">value,</if>
-            <if test="meaning != null">meaning,</if>
+            <if test="tableName != null">table_name,</if>
+            <if test="columnName != null">column_name,</if>
+            <if test="title != null">title,</if>
             <if test="status != null">status,</if>
             update_version,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
-            <if test="columnId != null">#{columnId},</if>
-            <if test="value != null">#{value},</if>
-            <if test="meaning != null">#{meaning},</if>
+            <if test="tableName != null">#{tableName},</if>
+            <if test="columnName != null">#{columnName},</if>
+            <if test="title != null">#{title},</if>
             <if test="status != null">#{status},</if>
             1,
         </trim>
     </insert>
 
-    <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.ColumnDictPO" useGeneratedKeys="true" keyProperty="id">
-        insert into sys_column_dict
-        (id,column_id,value,meaning,status,update_version)
+    <insert id="insertCollection" parameterType="com.msh.fastdevelop.sys.client.po.ColumnInfoPO" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_column_info
+        (id,table_name,column_name,title,status,update_version)
         values
         <foreach collection="list" index="index" separator="," item="item">
-            (#{item.id},#{item.columnId},#{item.value},#{item.meaning},#{item.status},1)
+            (#{item.id},#{item.tableName},#{item.columnName},#{item.title},#{item.status},1)
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.msh.fastdevelop.sys.client.po.ColumnDictPO">
-        update sys_column_dict
+    <update id="update" parameterType="com.msh.fastdevelop.sys.client.po.ColumnInfoPO">
+        update sys_column_info
         <set>
-            <if test="columnId != null">
-                column_id = #{columnId},
+            <if test="tableName != null">
+                table_name = #{tableName},
             </if>
-            <if test="value != null">
-                value = #{value},
+            <if test="columnName != null">
+                column_name = #{columnName},
             </if>
-            <if test="meaning != null">
-                meaning = #{meaning},
+            <if test="title != null">
+                title = #{title},
             </if>
             <if test="status != null">
                 status = #{status},
@@ -107,9 +107,9 @@
     </update>
 
     <delete id="delete">
-        delete from sys_column_dict where id = #{id}
+        delete from sys_column_info where id = #{id}
     </delete>
     <delete id="logicDelete">
-        update sys_column_dict set status = -1 where id = #{id}
+        update sys_column_info set status = -1 where id = #{id}
     </delete>
 </mapper>

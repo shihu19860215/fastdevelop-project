@@ -9,18 +9,18 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-11-14 18:05:59
+ * @date 2019-11-14 16:17:56
  */
-@ApiModel("字段字典")
-public class ColumnDictPO extends BasePO{
-	@ApiModelProperty("字段id")
-	private Long columnId;
+@ApiModel
+public class ColumnInfoPO extends BasePO{
+	@ApiModelProperty("表名")
+	private String tableName;
 
-	@ApiModelProperty("数据库值")
-	private Integer value;
+	@ApiModelProperty("字段名")
+	private String columnName;
 
-	@ApiModelProperty("实际意思")
-	private String meaning;
+	@ApiModelProperty("标题")
+	private String title;
 
 	@ApiModelProperty("状态")
 	private Integer status;
@@ -35,28 +35,28 @@ public class ColumnDictPO extends BasePO{
 	private Date updateTime;
 
 
-	public void setColumnId(Long value) {
-		this.columnId = value;
+	public void setTableName(String value) {
+		this.tableName = value;
 	}
 
-	public Long getColumnId() {
-		return this.columnId;
+	public String getTableName() {
+		return this.tableName;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setColumnName(String value) {
+		this.columnName = value;
 	}
 
-	public Integer getValue() {
-		return this.value;
+	public String getColumnName() {
+		return this.columnName;
 	}
 
-	public void setMeaning(String value) {
-		this.meaning = value;
+	public void setTitle(String value) {
+		this.title = value;
 	}
 
-	public String getMeaning() {
-		return this.meaning;
+	public String getTitle() {
+		return this.title;
 	}
 
 	public void setStatus(Integer value) {
@@ -96,7 +96,7 @@ public class ColumnDictPO extends BasePO{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		boolean nullFlag=false;
-		sb.append("ColumnDictPO{");
+		sb.append("ColumnInfoPO{");
 		if(null!=id){
 			if(nullFlag){
 				sb.append(",id=").append(id);
@@ -105,27 +105,27 @@ public class ColumnDictPO extends BasePO{
 				nullFlag=true;
 			}
 		}
-		if(null!=columnId){
+		if(null!=tableName){
 			if(nullFlag){
-				sb.append(",columnId=").append(columnId);
+				sb.append(",tableName=").append(tableName);
 			}else {
-				sb.append("columnId=").append(columnId);
+				sb.append("tableName=").append(tableName);
 				nullFlag=true;
 			}
 		}
-		if(null!=value){
+		if(null!=columnName){
 			if(nullFlag){
-				sb.append(",value=").append(value);
+				sb.append(",columnName=").append(columnName);
 			}else {
-				sb.append("value=").append(value);
+				sb.append("columnName=").append(columnName);
 				nullFlag=true;
 			}
 		}
-		if(null!=meaning){
+		if(null!=title){
 			if(nullFlag){
-				sb.append(",meaning=").append(meaning);
+				sb.append(",title=").append(title);
 			}else {
-				sb.append("meaning=").append(meaning);
+				sb.append("title=").append(title);
 				nullFlag=true;
 			}
 		}

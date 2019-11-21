@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @email m-sh@qq.com
  * @date 2019-06-24 20:24:20
  */
-@ApiModel
+@ApiModel("行政区域规划码")
 public class AreaPO extends BasePO{
 	@ApiModelProperty("行政简码")
 	private Integer simpleCode;

@@ -10,9 +10,9 @@ import lombok.Data;
 /**
  * @author shihu
  * @email m-sh@qq.com
- * @date 2019-07-22 14:50:38
+ * @date 2019-11-14 18:05:59
  */
-@ApiModel
+@ApiModel("字段字典")
 @Data
 public class ColumnDictVO extends ColumnDictPO {
 
@@ -20,7 +20,7 @@ public class ColumnDictVO extends ColumnDictPO {
 	public ColumnDictVO(ColumnDictPO columnDictPO){
 		this.setId(columnDictPO.getId());
 		this.setColumnId(columnDictPO.getColumnId());
-		this.setDatabaseValue(columnDictPO.getDatabaseValue());
+		this.setValue(columnDictPO.getValue());
 		this.setMeaning(columnDictPO.getMeaning());
 		this.setStatus(columnDictPO.getStatus());
 		this.setUpdateVersion(columnDictPO.getUpdateVersion());
