@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 部门服务器
-Source Server Version : 50629
-Source Host           : 192.168.7.34:3306
+Source Server         : dev-10.37.251.224
+Source Server Version : 50636
+Source Host           : 10.37.251.224:3309
 Source Database       : fastdevelop
 
 Target Server Type    : MYSQL
-Target Server Version : 50629
+Target Server Version : 50636
 File Encoding         : 65001
 
-Date: 2019-07-29 17:52:23
+Date: 2019-11-21 16:17:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3440,7 +3440,7 @@ CREATE TABLE `sys_audit` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='审计列表';
 
 -- ----------------------------
 -- Records of sys_audit
@@ -3463,7 +3463,7 @@ CREATE TABLE `sys_audit_configure` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='审计配置';
 
 -- ----------------------------
 -- Records of sys_audit_configure
@@ -3489,7 +3489,7 @@ CREATE TABLE `sys_authority` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COMMENT='权限列表';
 
 -- ----------------------------
 -- Records of sys_authority
@@ -3509,7 +3509,7 @@ INSERT INTO `sys_authority` VALUES ('12', '用户列表删除按钮', 'userListD
 INSERT INTO `sys_authority` VALUES ('13', '用户列表启用停用按钮', 'userListStartStopButton', '4', '4', '2', '5', '', '1', '1', '2019-06-24 16:30:03', '2019-06-24 16:30:03');
 INSERT INTO `sys_authority` VALUES ('14', '工具箱', 'tool', '0', '1', '1', '20', 'el-icon-s-cooperation', '1', '2', '2019-06-24 20:21:35', '2019-06-24 20:24:37');
 INSERT INTO `sys_authority` VALUES ('15', '区域列表', 'arealist', '14', '2', '1', '1', '', '1', '2', '2019-06-24 20:25:08', '2019-06-24 20:26:09');
-INSERT INTO `sys_authority` VALUES ('16', '字段信息详情', 'columndictlist', '41', '3', '3', '1', '', '1', '3', '2019-06-25 10:14:05', '2019-07-22 17:56:15');
+INSERT INTO `sys_authority` VALUES ('16', '字段字典', 'columndictlist', '41', '3', '1', '2', '', '1', '4', '2019-06-25 10:14:05', '2019-11-14 18:43:13');
 INSERT INTO `sys_authority` VALUES ('17', '审计系统', 'audit', '14', '2', '1', '3', '', '1', '1', '2019-06-29 14:12:50', '2019-06-29 14:12:50');
 INSERT INTO `sys_authority` VALUES ('18', '审计列表', 'auditlist', '17', '3', '1', '1', '', '1', '1', '2019-06-29 14:13:08', '2019-06-29 14:13:08');
 INSERT INTO `sys_authority` VALUES ('19', '审计配置列表', 'auditconfigurelist', '17', '3', '1', '2', '', '1', '1', '2019-06-29 14:13:28', '2019-06-29 14:13:28');
@@ -3533,7 +3533,13 @@ INSERT INTO `sys_authority` VALUES ('36', '审计列表配置删除按钮', 'aud
 INSERT INTO `sys_authority` VALUES ('37', '审计列表配置启用停用按钮', 'auditlistConfigStartStopButton', '19', '4', '2', '5', '', '1', '1', '2019-07-16 14:28:04', '2019-07-16 14:28:04');
 INSERT INTO `sys_authority` VALUES ('38', '区域别表页面', 'arealistPage', '15', '3', '3', '1', '', '1', '1', '2019-07-17 17:04:34', '2019-07-17 17:04:34');
 INSERT INTO `sys_authority` VALUES ('39', '区域列表启用禁用按钮', 'arealistEnableDisableButton', '15', '3', '2', '2', '', '1', '1', '2019-07-17 17:05:31', '2019-07-17 17:05:31');
-INSERT INTO `sys_authority` VALUES ('41', '字段信息列表', 'columnInfoList', '14', '2', '1', '2', '', '1', '3', '2019-07-22 17:26:40', '2019-07-22 17:56:38');
+INSERT INTO `sys_authority` VALUES ('41', '字段配置', 'column', '14', '2', '1', '2', '', '1', '3', '2019-07-22 17:26:40', '2019-11-14 18:21:30');
+INSERT INTO `sys_authority` VALUES ('44', '字段详情', 'columnInfoList', '41', '3', '1', '1', '', '1', '2', '2019-11-14 18:37:43', '2019-11-14 18:43:19');
+INSERT INTO `sys_authority` VALUES ('45', '字段详情列表页面', 'columnInfoListPage', '44', '4', '3', '1', '', '1', '2', '2019-11-14 18:38:50', '2019-11-14 18:43:30');
+INSERT INTO `sys_authority` VALUES ('46', ' 字段详情列表添加', 'columnInfoListAddButton', '44', '4', '3', '2', '', '1', '1', '2019-11-14 18:46:56', '2019-11-14 18:46:56');
+INSERT INTO `sys_authority` VALUES ('47', '字段详情列表编辑按钮', 'columnInfoListUpdateButton', '44', '4', '3', '3', '', '1', '1', '2019-11-14 18:48:07', '2019-11-14 18:48:07');
+INSERT INTO `sys_authority` VALUES ('48', '字段详情列表删除按钮', 'columnInfoListDelButton', '44', '4', '2', '4', '', '1', '1', '2019-11-14 18:48:32', '2019-11-14 18:48:32');
+INSERT INTO `sys_authority` VALUES ('49', '字段详情列表启用禁用按钮', 'columnInfoListStartStopButton', '44', '4', '2', '5', '', '1', '1', '2019-11-14 18:49:09', '2019-11-14 18:49:32');
 
 -- ----------------------------
 -- Table structure for `sys_authority_url`
@@ -3549,7 +3555,7 @@ CREATE TABLE `sys_authority_url` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='权限url';
 
 -- ----------------------------
 -- Records of sys_authority_url
@@ -3563,7 +3569,7 @@ INSERT INTO `sys_authority_url` VALUES ('6', '10', '/api/sys/user/insertuservo',
 INSERT INTO `sys_authority_url` VALUES ('7', '11', '/api/sys/user/updateuservo', '1', '1', '2', '2019-06-24 15:27:01', '2019-06-24 16:12:21');
 INSERT INTO `sys_authority_url` VALUES ('8', '12', '/api/sys/user/delete', '1', '1', '2', '2019-06-24 15:27:14', '2019-06-24 16:12:24');
 INSERT INTO `sys_authority_url` VALUES ('9', '13', '/api/sys/user/updateuservo', '1', '1', '1', '2019-06-24 16:30:24', '2019-06-24 16:30:24');
-INSERT INTO `sys_authority_url` VALUES ('10', '0', '/api/sys/columndict/listdict', '2', '1', '1', '2019-07-16 14:39:25', '2019-07-16 14:39:25');
+INSERT INTO `sys_authority_url` VALUES ('10', '0', '/api/sys/columninfo/getbytablecolumnname', '2', '1', '2', '2019-07-16 14:39:25', '2019-11-14 19:08:13');
 INSERT INTO `sys_authority_url` VALUES ('11', '27', '/api/sys/columndict/listvo', '1', '1', '1', '2019-07-16 15:11:28', '2019-07-16 15:11:28');
 INSERT INTO `sys_authority_url` VALUES ('12', '28', '/api/sys/columndict/insert', '1', '1', '1', '2019-07-16 15:12:17', '2019-07-16 15:12:17');
 INSERT INTO `sys_authority_url` VALUES ('13', '29', '/api/sys/columndict/update', '1', '1', '1', '2019-07-16 15:12:39', '2019-07-16 15:12:39');
@@ -3585,6 +3591,11 @@ INSERT INTO `sys_authority_url` VALUES ('28', '26', '/api/sys/authority/listvo',
 INSERT INTO `sys_authority_url` VALUES ('29', '25', '/api/sys/roleauthoritymapping/updateroleauth', '1', '1', '1', '2019-07-16 15:23:04', '2019-07-16 15:23:04');
 INSERT INTO `sys_authority_url` VALUES ('30', '38', '/api/sys/area/listvo', '1', '1', '1', '2019-07-17 17:06:11', '2019-07-17 17:06:11');
 INSERT INTO `sys_authority_url` VALUES ('31', '39', '/api/sys/area/update', '1', '1', '1', '2019-07-17 17:06:26', '2019-07-17 17:06:26');
+INSERT INTO `sys_authority_url` VALUES ('32', '45', '/api/sys/columninfo/listvo', '1', '1', '1', '2019-11-14 19:09:13', '2019-11-14 19:09:13');
+INSERT INTO `sys_authority_url` VALUES ('33', '46', '/api/sys/columninfo/insert', '1', '1', '1', '2019-11-14 19:09:41', '2019-11-14 19:09:41');
+INSERT INTO `sys_authority_url` VALUES ('34', '47', '/api/sys/columninfo/update', '1', '1', '1', '2019-11-14 19:09:48', '2019-11-14 19:09:48');
+INSERT INTO `sys_authority_url` VALUES ('35', '48', '/api/sys/columninfo/delete', '1', '1', '1', '2019-11-14 19:09:56', '2019-11-14 19:09:56');
+INSERT INTO `sys_authority_url` VALUES ('36', '49', '/api/sys/columninfo/uppdate', '1', '1', '1', '2019-11-14 19:10:03', '2019-11-14 19:10:03');
 
 -- ----------------------------
 -- Table structure for `sys_column_dict`
@@ -3593,7 +3604,7 @@ DROP TABLE IF EXISTS `sys_column_dict`;
 CREATE TABLE `sys_column_dict` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `column_id` bigint(20) NOT NULL COMMENT '字段id',
-  `database_value` tinyint(4) unsigned NOT NULL COMMENT '数据库值',
+  `value` tinyint(4) unsigned NOT NULL COMMENT '数据库值',
   `meaning` varchar(20) NOT NULL COMMENT '实际意思',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
   `update_version` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新版本',
@@ -3601,12 +3612,12 @@ CREATE TABLE `sys_column_dict` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `idx_column_id` (`column_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1907226483710000003 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1907226483710000003 DEFAULT CHARSET=utf8 COMMENT='字段字典';
 
 -- ----------------------------
 -- Records of sys_column_dict
 -- ----------------------------
-INSERT INTO `sys_column_dict` VALUES ('1', '1', '1', '菜单', '1', '8', '2019-06-02 16:05:30', '2019-07-22 17:51:26');
+INSERT INTO `sys_column_dict` VALUES ('1', '1', '1', '菜单', '1', '14', '2019-06-02 16:05:30', '2019-11-14 19:06:36');
 INSERT INTO `sys_column_dict` VALUES ('2', '1', '2', '按钮', '1', '0', '2019-06-02 16:07:37', '2019-07-22 14:49:13');
 INSERT INTO `sys_column_dict` VALUES ('3', '1', '3', '页面', '1', '0', '2019-06-02 16:12:20', '2019-07-22 14:49:18');
 INSERT INTO `sys_column_dict` VALUES ('4', '2', '1', '拥有权限可访问', '1', '2', '2019-06-02 16:45:09', '2019-07-22 14:49:19');
@@ -3630,8 +3641,9 @@ CREATE TABLE `sys_column_info` (
   `update_version` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '更新版本',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1907226482110000001 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_table_name_column_name` (`table_name`,`column_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1907226482110000001 DEFAULT CHARSET=utf8 COMMENT='字段详情';
 
 -- ----------------------------
 -- Records of sys_column_info
@@ -3652,7 +3664,7 @@ CREATE TABLE `sys_role` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色信息';
 
 -- ----------------------------
 -- Records of sys_role
@@ -3675,7 +3687,7 @@ CREATE TABLE `sys_role_authority_mapping` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_roleid_authid` (`role_id`,`authority_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 COMMENT='角色权限映射';
 
 -- ----------------------------
 -- Records of sys_role_authority_mapping
@@ -3690,19 +3702,6 @@ INSERT INTO `sys_role_authority_mapping` VALUES ('136', '2', '30', '1', '1', '20
 INSERT INTO `sys_role_authority_mapping` VALUES ('137', '2', '14', '1', '1', '2019-07-17 17:07:13', '2019-07-17 17:07:13');
 INSERT INTO `sys_role_authority_mapping` VALUES ('138', '2', '15', '1', '1', '2019-07-17 17:07:13', '2019-07-17 17:07:13');
 INSERT INTO `sys_role_authority_mapping` VALUES ('139', '2', '31', '1', '1', '2019-07-17 17:07:13', '2019-07-17 17:07:13');
-INSERT INTO `sys_role_authority_mapping` VALUES ('140', '3', '32', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('141', '3', '33', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('142', '3', '34', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('143', '3', '35', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('144', '3', '36', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('145', '3', '37', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('146', '3', '38', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('147', '3', '39', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('148', '3', '14', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('149', '3', '15', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('150', '3', '17', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('151', '3', '18', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
-INSERT INTO `sys_role_authority_mapping` VALUES ('152', '3', '19', '1', '1', '2019-07-17 17:07:16', '2019-07-17 17:07:16');
 INSERT INTO `sys_role_authority_mapping` VALUES ('153', '1', '1', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
 INSERT INTO `sys_role_authority_mapping` VALUES ('154', '1', '2', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
 INSERT INTO `sys_role_authority_mapping` VALUES ('155', '1', '3', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
@@ -3742,6 +3741,32 @@ INSERT INTO `sys_role_authority_mapping` VALUES ('188', '1', '36', '1', '1', '20
 INSERT INTO `sys_role_authority_mapping` VALUES ('189', '1', '37', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
 INSERT INTO `sys_role_authority_mapping` VALUES ('190', '1', '38', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
 INSERT INTO `sys_role_authority_mapping` VALUES ('191', '1', '39', '1', '1', '2019-07-17 17:07:19', '2019-07-17 17:07:19');
+INSERT INTO `sys_role_authority_mapping` VALUES ('192', '3', '14', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('193', '3', '15', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('194', '3', '16', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('195', '3', '17', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('196', '3', '18', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('197', '3', '19', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('198', '3', '27', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('199', '3', '28', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('200', '3', '29', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('201', '3', '30', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('202', '3', '31', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('203', '3', '32', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('204', '3', '33', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('205', '3', '34', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('206', '3', '35', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('207', '3', '36', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('208', '3', '37', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('209', '3', '38', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('210', '3', '39', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('211', '3', '41', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('212', '3', '44', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('213', '3', '45', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('214', '3', '46', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('215', '3', '47', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('216', '3', '48', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
+INSERT INTO `sys_role_authority_mapping` VALUES ('217', '3', '49', '1', '1', '2019-11-15 09:20:39', '2019-11-15 09:20:39');
 
 -- ----------------------------
 -- Table structure for `sys_user`
@@ -3751,20 +3776,21 @@ CREATE TABLE `sys_user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `username` varchar(20) NOT NULL COMMENT '用户名',
   `password` varchar(64) NOT NULL COMMENT '密码',
+  `tel` varchar(20) NOT NULL DEFAULT '',
   `nickname` varchar(20) NOT NULL COMMENT '昵称',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
   `update_version` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '更新版本',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin', '系统管理员', '1', '7', '2019-06-24 15:07:54', '2019-07-16 10:54:09');
-INSERT INTO `sys_user` VALUES ('2', 'shihu', '123456', '时虎', '1', '9', '2019-06-20 18:07:41', '2019-07-17 16:48:27');
-INSERT INTO `sys_user` VALUES ('3', 'guoyang', '123456', '郭杨33', '1', '21', '2019-06-20 18:27:53', '2019-06-29 18:22:10');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin', '', '系统管理员', '1', '7', '2019-06-24 15:07:54', '2019-07-16 10:54:09');
+INSERT INTO `sys_user` VALUES ('2', 'shihu', '123456', '', '时虎', '1', '9', '2019-06-20 18:07:41', '2019-07-17 16:48:27');
+INSERT INTO `sys_user` VALUES ('3', 'guoyang', '123456', '', '郭杨33', '1', '21', '2019-06-20 18:27:53', '2019-06-29 18:22:10');
 
 -- ----------------------------
 -- Table structure for `sys_user_role_mapping`
@@ -3780,7 +3806,7 @@ CREATE TABLE `sys_user_role_mapping` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_userid_roleid` (`user_id`,`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户角色映射';
 
 -- ----------------------------
 -- Records of sys_user_role_mapping
