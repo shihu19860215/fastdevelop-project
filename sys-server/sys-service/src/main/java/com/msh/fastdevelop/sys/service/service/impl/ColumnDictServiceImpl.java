@@ -9,16 +9,14 @@ import com.msh.fastdevelop.sys.service.service.ColumnDictService;
 import com.msh.fastdevelop.sys.service.service.*;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
+import com.msh.frame.interfaces.IdGenerateable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shihu
@@ -81,7 +79,7 @@ public class ColumnDictServiceImpl extends BaseServiceImpl<ColumnDictPO,ColumnDi
     public CommonResult<List<ColumnDictVO>> listColumnDictVO(ColumnDictQO param) {
         List<ColumnDictPO> columnDictPOList = columnDictService.list(param).getResult();
         if(null == columnDictPOList || columnDictPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<ColumnDictVO> columnDictVOList = new ArrayList<>(columnDictPOList.size());
         for(ColumnDictPO columnDictPO: columnDictPOList){

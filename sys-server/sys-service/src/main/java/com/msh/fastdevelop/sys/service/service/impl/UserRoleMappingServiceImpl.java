@@ -8,16 +8,13 @@ import com.msh.fastdevelop.sys.service.dao.UserRoleMappingDao;
 import com.msh.fastdevelop.sys.service.service.UserRoleMappingService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shihu
@@ -64,7 +61,7 @@ public class UserRoleMappingServiceImpl extends BaseServiceImpl<UserRoleMappingP
     public CommonResult<List<UserRoleMappingVO>> listUserRoleMappingVO(UserRoleMappingQO param) {
         List<UserRoleMappingPO> userRoleMappingPOList = userRoleMappingService.list(param).getResult();
         if(null == userRoleMappingPOList || userRoleMappingPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<UserRoleMappingVO> userRoleMappingVOList = new ArrayList<>(userRoleMappingPOList.size());
         for(UserRoleMappingPO userRoleMappingPO: userRoleMappingPOList){

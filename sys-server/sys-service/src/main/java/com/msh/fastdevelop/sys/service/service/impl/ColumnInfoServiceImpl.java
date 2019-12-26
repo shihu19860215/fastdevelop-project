@@ -12,16 +12,13 @@ import com.msh.fastdevelop.sys.service.service.ColumnInfoService;
 import com.msh.fastdevelop.sys.service.service.*;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shihu
@@ -86,7 +83,7 @@ public class ColumnInfoServiceImpl extends BaseServiceImpl<ColumnInfoPO,ColumnIn
     public CommonResult<List<ColumnInfoVO>> listColumnInfoVO(ColumnInfoQO param) {
         List<ColumnInfoPO> columnInfoPOList = columnInfoService.list(param).getResult();
         if(null == columnInfoPOList || columnInfoPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<ColumnInfoVO> columnInfoVOList = new ArrayList<>(columnInfoPOList.size());
         for(ColumnInfoPO columnInfoPO: columnInfoPOList){

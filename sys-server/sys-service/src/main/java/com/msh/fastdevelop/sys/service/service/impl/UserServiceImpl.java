@@ -11,7 +11,7 @@ import com.msh.fastdevelop.sys.client.vo.UserVO;
 import com.msh.fastdevelop.sys.service.dao.UserDao;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +90,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
     public CommonResult<List<UserVO>> listUserVO(UserQO param) {
         List<UserPO> userPOList = userService.list(param).getResult();
         if(null == userPOList || userPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<UserVO> userVOList = new ArrayList<>(userPOList.size());
         for(UserPO userPO: userPOList){
@@ -124,7 +124,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
                 for(UserVO userVO: userVOList){
                     Set<Long> longSet = map.get(userVO.getId());
                     if(null == longSet){
-                        longSet = CollectionUtils.EMPTY_SET;
+                        longSet = Collections.emptySet();
                     }
                     userVO.setRoleIds(longSet);
                 }
@@ -234,7 +234,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
             }
         }
         if(null == authIds){
-            authIds = CollectionUtils.EMPTY_SET;
+            authIds = Collections.emptySet();
         }
         userInfo.setAuthIds(authIds);
 
@@ -251,7 +251,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
             }
         }
         if(null == authUrls){
-            authUrls = CollectionUtils.EMPTY_SET;
+            authUrls = Collections.emptySet();
         }
         userInfo.setAuthUrls(authUrls);
 
@@ -270,7 +270,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserPO,UserQO> implements U
             authorityVOList = authorityService.listAuthorityVO(authorityQO).getResult();
         }
         if(null == authorityVOList){
-            authorityVOList = CollectionUtils.EMPTY_LIST;
+            authorityVOList = Collections.emptyList();
         }
         userInfo.setMenuList(authorityVOList);
 

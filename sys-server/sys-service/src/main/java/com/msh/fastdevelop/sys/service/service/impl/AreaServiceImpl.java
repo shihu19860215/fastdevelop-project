@@ -8,16 +8,13 @@ import com.msh.fastdevelop.sys.service.dao.AreaDao;
 import com.msh.fastdevelop.sys.service.service.AreaService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shihu
@@ -71,7 +68,7 @@ public class AreaServiceImpl extends BaseServiceImpl<AreaPO,AreaQO> implements A
     public CommonResult<List<AreaVO>> listAreaVO(AreaQO param) {
         List<AreaPO> areaPOList = areaService.list(param).getResult();
         if(null == areaPOList || areaPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<AreaVO> areaVOList = new ArrayList<>(areaPOList.size());
         for(AreaPO areaPO: areaPOList){

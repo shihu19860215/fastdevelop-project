@@ -14,7 +14,7 @@ import com.msh.fastdevelop.sys.service.service.AuditService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
 import com.msh.frame.client.exception.ServiceRuntimeException;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import com.msh.frame.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +80,7 @@ public class AuditServiceImpl extends BaseServiceImpl<AuditPO,AuditQO> implement
     public CommonResult<List<AuditVO>> listAuditVO(AuditQO param) {
         List<AuditPO> auditPOList = auditService.list(param).getResult();
         if(auditPOList.isEmpty()) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<AuditVO> auditVOList = new ArrayList<>(auditPOList.size());
         for(AuditPO auditPO: auditPOList){

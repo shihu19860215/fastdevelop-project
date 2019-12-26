@@ -27,6 +27,10 @@
             <artifactId>msh-frame-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.msh</groupId>
+            <artifactId>msh-starter-common-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <exclusions>

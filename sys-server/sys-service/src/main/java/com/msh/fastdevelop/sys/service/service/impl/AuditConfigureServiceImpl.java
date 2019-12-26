@@ -8,16 +8,13 @@ import com.msh.fastdevelop.sys.service.dao.AuditConfigureDao;
 import com.msh.fastdevelop.sys.service.service.AuditConfigureService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shihu
@@ -71,7 +68,7 @@ public class AuditConfigureServiceImpl extends BaseServiceImpl<AuditConfigurePO,
     public CommonResult<List<AuditConfigureVO>> listAuditConfigureVO(AuditConfigureQO param) {
         List<AuditConfigurePO> auditConfigurePOList = auditConfigureService.list(param).getResult();
         if(null == auditConfigurePOList || auditConfigurePOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<AuditConfigureVO> auditConfigureVOList = new ArrayList<>(auditConfigurePOList.size());
         for(AuditConfigurePO auditConfigurePO: auditConfigurePOList){

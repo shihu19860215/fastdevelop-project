@@ -110,7 +110,7 @@ public class AuthorityServiceImpl extends BaseServiceImpl<AuthorityPO,AuthorityQ
     public CommonResult<List<AuthorityVO>> listAuthorityVO(AuthorityQO param) {
         List<AuthorityPO> authorityPOList = authorityService.list(param).getResult();
         if(null == authorityPOList || authorityPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<AuthorityVO> authorityVOList = new ArrayList<>(authorityPOList.size());
         for(AuthorityPO authorityPO: authorityPOList){

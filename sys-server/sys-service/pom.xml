@@ -23,7 +23,15 @@
         </dependency>
         <dependency>
             <groupId>com.msh</groupId>
-            <artifactId>msh-cache-redis</artifactId>
+            <artifactId>msh-starter-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msh</groupId>
+            <artifactId>msh-starter-id-generate</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.msh</groupId>
+            <artifactId>msh-frame-common</artifactId>
         </dependency>
 
         <!-- Spring Boot Mybatis 依赖 -->

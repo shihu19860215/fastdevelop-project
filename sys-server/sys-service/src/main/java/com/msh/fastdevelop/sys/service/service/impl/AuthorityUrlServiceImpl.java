@@ -64,7 +64,7 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
     public CommonResult<List<AuthorityUrlVO>> listAuthorityUrlVO(AuthorityUrlQO param) {
         List<AuthorityUrlPO> authorityUrlPOList = authorityUrlService.list(param).getResult();
         if(null == authorityUrlPOList || authorityUrlPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<AuthorityUrlVO> authorityUrlVOList = new ArrayList<>(authorityUrlPOList.size());
         for(AuthorityUrlPO authorityUrlPO: authorityUrlPOList){
@@ -124,7 +124,7 @@ public class AuthorityUrlServiceImpl extends BaseServiceImpl<AuthorityUrlPO,Auth
         Map<String, Integer> map ;
         List<AuthorityUrlPO> authorityUrlPOList = authorityUrlService.list(new AuthorityUrlQO()).getResult();
         if(null == authorityUrlPOList){
-            map = CollectionUtils.EMPTY_MAP;
+            map = Collections.emptyMap();
         }else {
             map = new HashMap<>(authorityUrlPOList.size()*2);
             for(AuthorityUrlPO authorityUrlPO: authorityUrlPOList){

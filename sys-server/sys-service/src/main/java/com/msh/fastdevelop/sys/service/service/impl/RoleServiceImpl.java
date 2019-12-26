@@ -14,7 +14,7 @@ import com.msh.fastdevelop.sys.service.dao.RoleDao;
 import com.msh.fastdevelop.sys.service.service.RoleService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RolePO,RoleQO> implements R
     public CommonResult<List<RoleVO>> listRoleVO(RoleQO param) {
         List<RolePO> rolePOList = roleService.list(param).getResult();
         if(null == rolePOList || rolePOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<RoleVO> roleVOList = new ArrayList<>(rolePOList.size());
         for(RolePO rolePO: rolePOList){
@@ -104,7 +104,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RolePO,RoleQO> implements R
                 for(RoleVO roleVO: roleVOList){
                     Set<Long> longSet = map.get(roleVO.getId());
                     if(null == longSet){
-                        longSet = CollectionUtils.EMPTY_SET;
+                        longSet = Collections.emptySet();
                     }
                     roleVO.setAuthIds(longSet);
                 }

@@ -71,10 +71,24 @@
                 <artifactId>msh-frame-client</artifactId>
                 <version>${msh.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.msh</groupId>
-                <artifactId>msh-cache-redis</artifactId>
+                <artifactId>msh-starter-id-generate</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-starter-common</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-starter-common-web</artifactId>
+                <version>${msh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.msh</groupId>
+                <artifactId>msh-starter-redis</artifactId>
                 <version>${msh.version}</version>
             </dependency>
 

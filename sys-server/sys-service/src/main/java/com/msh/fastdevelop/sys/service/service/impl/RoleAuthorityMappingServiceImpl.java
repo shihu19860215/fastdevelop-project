@@ -9,7 +9,7 @@ import com.msh.fastdevelop.sys.service.dao.RoleAuthorityMappingDao;
 import com.msh.fastdevelop.sys.service.service.RoleAuthorityMappingService;
 import com.msh.frame.client.common.CommonResult;
 import com.msh.frame.client.common.CommonCode;
-import com.msh.frame.common.common.IdGenerateable;
+import com.msh.frame.interfaces.IdGenerateable;
 import com.msh.frame.common.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +63,7 @@ public class RoleAuthorityMappingServiceImpl extends BaseServiceImpl<RoleAuthori
     public CommonResult<List<RoleAuthorityMappingVO>> listRoleAuthorityMappingVO(RoleAuthorityMappingQO param) {
         List<RoleAuthorityMappingPO> roleAuthorityMappingPOList = roleAuthorityMappingService.list(param).getResult();
         if(null == roleAuthorityMappingPOList || roleAuthorityMappingPOList.size() == 0) {
-            return CommonResult.successReturn(CollectionUtils.EMPTY_LIST);
+            return CommonResult.successReturn(Collections.emptyList());
         }
         List<RoleAuthorityMappingVO> roleAuthorityMappingVOList = new ArrayList<>(roleAuthorityMappingPOList.size());
         for(RoleAuthorityMappingPO roleAuthorityMappingPO: roleAuthorityMappingPOList){

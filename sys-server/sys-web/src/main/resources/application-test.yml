@@ -15,9 +15,9 @@ spring:
   datasource: #以下数据库部分自行修改
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.7.34:3306/fastdevelop?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-    username: entore
-    password: entore
+    url: jdbc:mysql://192.168.1.68:3306/fastdevelop?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 5523003
     dbcp2:
       max-idle: 10
       max-wait-millis: 10000
