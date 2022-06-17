@@ -24,7 +24,7 @@
     <properties>
         <msh.version>1.0.0</msh.version>
         <sys.version>1.0.0</sys.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <lombok.version>1.16.18</lombok.version>
         <servlet.version>4.0.0-b05</servlet.version>
         <mybatis.springboot.version>1.2.0</mybatis.springboot.version>
